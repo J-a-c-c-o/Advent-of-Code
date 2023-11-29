@@ -1,0 +1,32 @@
+package yearYEAR.dayDAY;
+
+
+import java.util.List;
+
+import utils.Utils;
+
+public class Main {
+
+    Utils utils = new Utils();
+
+    public static void main(String[] args) {
+        Main main = new Main();
+        System.out.println("Part 1: " + main.part1());
+        System.out.println("Part 2: " + main.part2());
+    }
+
+    public List<String> getInput() {
+        return utils.getLines("src/yearYEAR/dayDAY/input.txt");
+    }
+
+    public String part1() {
+        return "";
+    }
+
+    public String part2() {
+        return "";
+    }
+
+
+
+}
