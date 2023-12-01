@@ -21,6 +21,14 @@ public class Main {
     }
 
     public String part1() {
+        return findNumbers(true);
+    }
+
+    public String part2() {
+        return findNumbers(false);
+    }
+
+    private String findNumbers(boolean part1) {
         List<String> input = getInput();
 
         int sum = 0;
@@ -29,7 +37,7 @@ public class Main {
             for (int i = 0; i < line.length(); i++) {
                 if (Character.isDigit(line.charAt(i))) {
                     result.add(String.valueOf(line.charAt(i)));
-                } else {
+                } else if (!part1) {
                     if (i + 2 < line.length()) {
                         String threeLetter = String.valueOf(line.charAt(i)) + line.charAt(i + 1) + line.charAt(i + 2);
 
@@ -43,8 +51,8 @@ public class Main {
 
 
                     if (i + 3 < line.length()) {
-                        String fourletters = String.valueOf(line.charAt(i)) + line.charAt(i + 1) + line.charAt(i + 2) + line.charAt(i + 3);
-                        switch (fourletters) {
+                        String fourLetters = String.valueOf(line.charAt(i)) + line.charAt(i + 1) + line.charAt(i + 2) + line.charAt(i + 3);
+                        switch (fourLetters) {
                             case "four" -> result.add("4");
                             case "five" -> result.add("5");
                             case "nine" -> result.add("9");
@@ -67,18 +75,13 @@ public class Main {
             int first = Integer.parseInt(result.get(0));
             int last = Integer.parseInt(result.get(result.size() - 1));
 
-            System.out.println(first + " " + last);
-
             sum = sum + first*10 + last;
         }
 
         return String.valueOf(sum);
-
     }
 
-    public String part2() {
-        return "";
-    }
+
 
 
 
