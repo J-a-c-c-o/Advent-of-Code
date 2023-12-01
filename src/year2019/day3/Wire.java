@@ -7,22 +7,22 @@ import java.util.List;
 
 public class Wire {
 
-    Pair current;
-    List<Pair> path;
+    Pair<Integer, Integer> current;
+    List<Pair<Integer, Integer>> path;
 
-    List<Pair> sort;
+    List<Pair<Integer, Integer>> sort;
 
 
 
     public Wire(List<String> input1) {
         path = new ArrayList<>();
-        current = new Pair(0, 0);
+        current = new Pair<Integer, Integer>(0, 0);
         sort = new ArrayList<>();
         runPath(input1);
     }
 
     public void runPath(List<String> input) {
-        current = new Pair(0, 0);
+        current = new Pair<Integer, Integer>(0, 0);
         for (String in : input) {
             String command = in.substring(0,1);
             int steps = Integer.parseInt(in.substring(1));
@@ -37,42 +37,42 @@ public class Wire {
 
     private void stepsR(int steps) {
         for (int i = 1; i <= steps; i++) {
-            path.add(new Pair(current.x + i, current.y));
+            path.add(new Pair<Integer, Integer>(current.x + i, current.y));
         }
-        current = new Pair(current.x + steps, current.y);
+        current = new Pair<Integer, Integer>(current.x + steps, current.y);
 
     }
 
     private void stepsL(int steps) {
         for (int i = 1; i <= steps; i++) {
-            path.add(new Pair(current.x - i, current.y));
+            path.add(new Pair<Integer, Integer>(current.x - i, current.y));
         }
-        current = new Pair(current.x - steps, current.y);
+        current = new Pair<Integer, Integer>(current.x - steps, current.y);
 
     }
 
     private void stepsU(int steps) {
         for (int i = 1; i <= steps; i++) {
-            path.add(new Pair(current.x, current.y + i));
+            path.add(new Pair<Integer, Integer>(current.x, current.y + i));
         }
-        current = new Pair(current.x, current.y + steps);
+        current = new Pair<Integer, Integer>(current.x, current.y + steps);
 
     }
 
     private void stepsD(int steps) {
         for (int i = 1; i <= steps; i++) {
-            path.add(new Pair(current.x, current.y - i));
+            path.add(new Pair<Integer, Integer>(current.x, current.y - i));
         }
-        current = new Pair(current.x, current.y - steps);
+        current = new Pair<Integer, Integer>(current.x, current.y - steps);
 
     }
 
     public void getIntersection(Wire wire, boolean part1) {
-        List<Pair> copy = new ArrayList<>(path);
-        List<Pair> copy2 = new ArrayList<>(wire.path);
+        ArrayList<Pair<Integer, Integer>> copy = new ArrayList<>(path);
+        ArrayList<Pair<Integer, Integer>> copy2 = new ArrayList<>(wire.path);
+
 
         copy.retainAll(copy2);
-
 
         sort = copy;
 
@@ -101,7 +101,7 @@ public class Wire {
         return getDistancePath(wire, sort.get(0));
     }
 
-    private int getDistancePath(Wire wire, Pair pair) {
+    private int getDistancePath(Wire wire, Pair<Integer, Integer> pair) {
         int distance = path.indexOf(pair) + 1;
         int distance2 = wire.path.indexOf(pair) + 1;
 

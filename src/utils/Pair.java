@@ -2,12 +2,12 @@ package utils;
 
 import java.util.Objects;
 
-public class Pair {
+public class Pair<A, B> {
 
-        public int x;
-        public int y;
+        public A x;
+        public B y;
 
-        public Pair(int x, int y) {
+        public Pair(A x, B y) {
             this.x = x;
             this.y = y;
         }
@@ -15,9 +15,8 @@ public class Pair {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Pair pair)) return false;
-        return x == pair.x &&
-                y == pair.y;
+        if (!(o instanceof Pair<?, ?> pair)) return false;
+        return x.equals(pair.x) && y.equals(pair.y);
     }
 
     @Override

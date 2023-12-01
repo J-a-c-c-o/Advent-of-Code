@@ -39,6 +39,7 @@ public class Main {
         Wire wire = new Wire(getInput().get(0));
         Wire wire2 = new Wire(getInput().get(1));
 
+
         wire.getIntersection(wire2, true);
 
         return String.valueOf(wire.getDistance());
