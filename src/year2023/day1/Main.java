@@ -26,13 +26,6 @@ public class Main {
         int sum = 0;
         for (String line : input) {
             List<String> result = new ArrayList<>();
-
-            //if it contains a number in letter form, keep the letter and add the number at the start of that word
-
-
-
-
-
             for (int i = 0; i < line.length(); i++) {
                 if (Character.isDigit(line.charAt(i))) {
                     result.add(String.valueOf(line.charAt(i)));
