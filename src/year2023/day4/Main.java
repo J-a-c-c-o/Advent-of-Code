@@ -20,8 +20,8 @@ public class Main {
     public List<Pair<List<String>, List<String>>> getInput() {
         List<String> input = utils.getLines("src/year2023/day4/input.txt");
         List<Pair<List<String>, List<String>>> list = new java.util.ArrayList<>();
-        for (int i = 0; i < input.size(); i++) {
-            String split = input.get(i).split(": ")[1];
+        for (String s : input) {
+            String split = s.split(": ")[1];
             String[] split2 = split.split(" \\| ");
             List<String> list1 = new java.util.ArrayList<>(List.of(split2[0].split(" ")));
             List<String> list2 = new java.util.ArrayList<>(List.of(split2[1].split(" ")));
