@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Pair<A, B> {
 
-        public A x;
-        public B y;
+    public A x;
+    public B y;
 
-        public Pair(A x, B y) {
-            this.x = x;
-            this.y = y;
-        }
+    public Pair(A x, B y) {
+        this.x = x;
+        this.y = y;
+    }
 
     @Override
     public boolean equals(Object o) {
