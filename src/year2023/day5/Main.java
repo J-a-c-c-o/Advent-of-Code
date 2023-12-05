@@ -9,7 +9,6 @@ import java.util.*;
 public class Main {
 
     private String[] seeds;
-    private List<List<String>> maps;
 
     Utils utils = new Utils();
 
@@ -21,13 +20,11 @@ public class Main {
 
     public List<List<String>> getInput() {
         List<String> input = utils.getLines("src/year2023/day5/input.txt");
-        String[] tempseeds = input.get(0).split(" ");
+        String[] tempSeeds = input.get(0).split(" ");
 
 
-        seeds = new String[tempseeds.length - 1];
-        for (int i = 0; i < seeds.length; i++) {
-            seeds[i] = tempseeds[i+1];
-        }
+        seeds = new String[tempSeeds.length - 1];
+        System.arraycopy(tempSeeds, 1, seeds, 0, seeds.length);
 
 
 
@@ -65,19 +62,14 @@ public class Main {
     public String part1() {
 
         List<List<String>> maps = getInput();
-        String[] cseed = seeds;
+        String[] listSeed = seeds;
         for (List<String> map : maps) {
-            cseed = getLocations(map, cseed);
-
-
+            listSeed = getLocations(map, listSeed);
         }
-
-
-
 
         // return min value
         long min = Long.MAX_VALUE;
-        for (String s : cseed) {
+        for (String s : listSeed) {
             if (Long.parseLong(s) < min) {
                 min = Long.parseLong(s);
             }
@@ -199,34 +191,30 @@ public class Main {
     }
 
     private static String[] updaters(String[] seeds, HashMap<Long, Pair<Long, Long>> locations) {
-        //return new seeds the hashmap has value startsource -> endsource, range
-
-        String[] newseeds = new String[seeds.length];
-        for (int i = 0; i < seeds.length; i++) {
-            newseeds[i] = seeds[i];
-        }
+        String[] newSeeds = new String[seeds.length];
+        System.arraycopy(seeds, 0, newSeeds, 0, seeds.length);
 
         for (int i = 0; i < seeds.length; i++) {
-            newseeds[i] = iterateMap(Long.parseLong(seeds[i]), locations);
+            newSeeds[i] = iterateMap(Long.parseLong(seeds[i]), locations);
         }
 
-        return newseeds;
+        return newSeeds;
 
     }
 
     private static String iterateMap(long seed, HashMap<Long, Pair<Long, Long>> locations) {
-        long newseed = seed;
+        long newSeed = seed;
         for (Long start : locations.keySet()) {
-            Pair<Long, Long> endrange = locations.get(start);
-            long startRange = endrange.x;
-            long endRange = endrange.y + endrange.x - 1;
+            Pair<Long, Long> range = locations.get(start);
+            long startRange = range.x;
+            long endRange = range.y + range.x - 1;
 
-            newseed = doCompute(newseed, start, startRange, endRange);
-            if (newseed != seed) {
-                return String.valueOf(newseed);
+            newSeed = doCompute(newSeed, start, startRange, endRange);
+            if (newSeed != seed) {
+                return String.valueOf(newSeed);
             }
         }
-        return String.valueOf(newseed);
+        return String.valueOf(newSeed);
     }
 
     private static Long doCompute(long seed, long start, long startRange, long endRange) {
