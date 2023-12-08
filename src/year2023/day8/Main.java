@@ -19,20 +19,20 @@ public class Main {
         System.out.println("Part 2: " + main.part2());
     }
 
-    public HashMap<String, Haunted> getInput() {
+    public HashMap<String, Node> getInput() {
         List<String> input = utils.getLines("src/year2023/day8/input.txt");
 
 
         path = input.get(0).split("");
 
 
-        HashMap<String, Haunted> map = new HashMap<>();
+        HashMap<String, Node> map = new HashMap<>();
 
 
         for (int i = 2; i < input.size(); i++) {
             String[] split1 = input.get(i).split(" = ");
-            Haunted haunted = new Haunted(split1[0]);
-            map.put(split1[0], haunted);
+            Node node = new Node(split1[0]);
+            map.put(split1[0], node);
         }
 
 
@@ -43,12 +43,12 @@ public class Main {
             String x = split[0].replaceAll("\\(", "");
             String y = split[1].replaceAll("\\)", "");
 
-            Haunted haunted = map.get(split1[0]);
-            Haunted haunted2 = map.get(x);
-            Haunted haunted3 = map.get(y);
+            Node node = map.get(split1[0]);
+            Node node2 = map.get(x);
+            Node node3 = map.get(y);
 
-            haunted.setLeft(haunted2);
-            haunted.setRight(haunted3);
+            node.setLeft(node2);
+            node.setRight(node3);
         }
 
         return map;
@@ -56,11 +56,11 @@ public class Main {
     }
 
     public String part1() {
-        HashMap<String, Haunted> map = getInput();
+        HashMap<String, Node> map = getInput();
 
         HashMap<String, List<Integer>> isInLoop = new HashMap<>();
 
-        Haunted current = map.get("AAA");
+        Node current = map.get("AAA");
 
         int i = 0;
         int count = 0;
@@ -97,20 +97,20 @@ public class Main {
     }
 
     public String part2() {
-        HashMap<String, Haunted> map = getInput();
+        HashMap<String, Node> map = getInput();
 
-        List<Haunted> currents = new ArrayList<>();
+        List<Node> currents = new ArrayList<>();
 
         //every not that ends with A
-        for (Haunted haunted : map.values()) {
-            if (haunted.getName().toCharArray()[2] == 'A') {
-                currents.add(haunted);
+        for (Node node : map.values()) {
+            if (node.getName().toCharArray()[2] == 'A') {
+                currents.add(node);
             }
         }
 
 
         List<Integer> steps = new ArrayList<>();
-        for (Haunted current : currents) {
+        for (Node current : currents) {
             int step = 0;
             int i = 0;
             while (i < path.length) {

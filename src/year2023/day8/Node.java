@@ -1,28 +1,28 @@
 package year2023.day8;
 
-public class Haunted {
+public class Node {
     private final String name;
-    private Haunted left;
-    private Haunted right;
+    private Node left;
+    private Node right;
 
-    public Haunted(String name) {
+    public Node(String name) {
         this.name = name;
     }
 
 
-    public void setLeft(Haunted left) {
+    public void setLeft(Node left) {
         this.left = left;
     }
 
-    public void setRight(Haunted right) {
+    public void setRight(Node right) {
         this.right = right;
     }
 
-    public Haunted getLeft() {
+    public Node getLeft() {
         return left;
     }
 
-    public Haunted getRight() {
+    public Node getRight() {
         return right;
     }
 
