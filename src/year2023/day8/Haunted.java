@@ -1,7 +1,7 @@
 package year2023.day8;
 
 public class Haunted {
-    private String name;
+    private final String name;
     private Haunted left;
     private Haunted right;
 
