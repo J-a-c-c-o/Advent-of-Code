@@ -6,7 +6,6 @@ import java.util.List;
 
 public class GraphSearch {
     // depth first search
-    // depth first search
     public static List<GraphNode> depth(GraphNode root, String name) {
         if (root.getName().equals(name)) {
             return new ArrayList<>();
@@ -25,6 +24,23 @@ public class GraphSearch {
         return null;
     }
 
+    public static List<GraphNode> searchDepth(GraphNode root, String name) {
+        List<GraphNode> result = depth(root, name);
+        if (result != null) {
+            result.add(root);
+            //reverse the list
+            List<GraphNode> reversed = new ArrayList<>();
+            for (int i = result.size() - 1; i >= 0; i--) {
+                reversed.add(result.get(i));
+            }
+            return reversed;
+        }
+
+        return null;
+    }
+
+
+    // breadth first search
     public static List<GraphNode> breadth(GraphNode root, String name) {
         List<GraphNode[]> queue = new ArrayList<>();
         GraphNode[] rootArray = {root};
@@ -47,20 +63,6 @@ public class GraphSearch {
         return null;
     }
 
-    public static List<GraphNode> searchDepth(GraphNode root, String name) {
-        List<GraphNode> result = depth(root, name);
-        if (result != null) {
-            result.add(root);
-            //reverse the list
-            List<GraphNode> reversed = new ArrayList<>();
-            for (int i = result.size() - 1; i >= 0; i--) {
-                reversed.add(result.get(i));
-            }
-            return reversed;
-        }
-
-        return null;
-    }
 
     public static void main(String[] args) {
         // Test
