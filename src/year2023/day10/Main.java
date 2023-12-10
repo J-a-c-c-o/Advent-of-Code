@@ -111,17 +111,22 @@ public class Main {
 
     public String part2(boolean visualise) {
 
+        char wallChar = '+';
+        char emptyChar = '.';
+        char replaceEmptyChar = 'I';
+        char fillChar = 'O';
+
         //expand map so it can be filled
-        char[][] map = bigMap(this.map, '+', '.');
+        char[][] map = bigMap(this.map, wallChar, emptyChar);
 
 
 
         //flood fill outside
         int[] start = new int[]{0, 0};
-        fill(map, start, '+', '.', 'I', 'O');
+        fill(map, start, wallChar, emptyChar, replaceEmptyChar, fillChar);
 
         if (visualise) {
-            printMap(map, '+', 'I', 'O');
+            printMap(map, wallChar, replaceEmptyChar, fillChar);
         }
 
 
