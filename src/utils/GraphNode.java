@@ -6,6 +6,7 @@ public class GraphNode {
     private final String name;
     private final GraphNode parent;
     private GraphNode[] children;
+    private int[] cords;
 
     public GraphNode(String name, GraphNode parent) {
         this.name = name;
@@ -17,6 +18,24 @@ public class GraphNode {
         this.name = name;
         this.parent = null;
         this.children = new GraphNode[0];
+    }
+
+    public GraphNode(String name, int[] cords) {
+        this.name = name;
+        this.parent = null;
+        this.children = new GraphNode[0];
+        this.cords = cords;
+    }
+
+    public GraphNode(String name, GraphNode parent, int[] cords) {
+        this.name = name;
+        this.parent = parent;
+        this.children = new GraphNode[0];
+        this.cords = cords;
+    }
+
+    public int[] getCords() {
+        return cords;
     }
 
     public void setChildren(GraphNode[] children) {
