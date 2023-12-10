@@ -11,6 +11,8 @@ public class Main {
     private final Map<String, int[]> directionsMapping;
     private final List<Pair<Integer, Integer>> visited;
 
+    private final char[][] map;
+
 
 
     Main() {
@@ -31,14 +33,21 @@ public class Main {
 
         visited = new ArrayList<>();
 
+        map = getInput();
+
     }
 
 
     public static void main(String[] args) {
+        long start = System.currentTimeMillis();
         Main main = new Main();
-        System.out.println("Part 1: " + main.part1());
-        System.out.println("Part 2: " + main.part2(true));
+        String part1 = main.part1();
+        long part1Time = System.currentTimeMillis() - start;
+        String part2 = main.part2(true);
+        long part2Time = System.currentTimeMillis() - start - part1Time;
 
+        System.out.println("Part 1: " + part1 + " took " + part1Time + "ms");
+        System.out.println("Part 2: " + part2 + " took " + part2Time + "ms");
     }
 
     public String part1() {
@@ -102,22 +111,21 @@ public class Main {
 
     public String part2(boolean visualise) {
 
-        char[][] input = getInput();
-
-
-
         //expand map so it can be filled
-        char[][] map = bigMap(input);
+        char[][] map = bigMap(this.map, '+', '.');
+
 
 
         //flood fill outside
         int[] start = new int[]{0, 0};
-        map = fill(map, start);
-
+        fill(map, start, '+', '.', 'I', 'O');
 
         if (visualise) {
-            printMap(map);
+            printMap(map, '+', 'I', 'O');
         }
+
+
+
 
         //count center 3x3
         int centerCount = 0;
@@ -132,12 +140,7 @@ public class Main {
         return String.valueOf(centerCount);
     }
 
-    private char[][] fill(char[][] originalMap, int[] start) {
-
-        char[][] map = new char[originalMap.length][];
-        for (int i = 0; i < originalMap.length; i++) {
-            map[i] = Arrays.copyOf(originalMap[i], originalMap[i].length);
-        }
+    private void fill(char[][] map, int[] start, char wallChar, char emptyChar, char replaceEmptyChar, char fillChar) {
 
         //flood fill
         List<Pair<Integer, Integer>> queue = new ArrayList<>();
@@ -147,11 +150,11 @@ public class Main {
             int i = current.x;
             int j = current.y;
 
-            if (map[i][j] != '.') {
+            if (map[i][j] != emptyChar) {
                 continue;
             }
 
-            map[i][j] = 'O';
+            map[i][j] = fillChar;
 
             for (int[] dir : directionsMapping.values()) {
                 int di = dir[0];
@@ -166,7 +169,7 @@ public class Main {
 
                 char nextPipe = map[newI][newJ];
 
-                if (nextPipe == '+') {
+                if (nextPipe == wallChar) {
                     continue;
                 }
 
@@ -181,14 +184,13 @@ public class Main {
         //replace all . with I
         for (char[] row : map) {
             for (int j = 0; j < row.length; j++) {
-                if (row[j] == '.') {
-                    row[j] = 'I';
+                if (row[j] == emptyChar) {
+                    row[j] = replaceEmptyChar;
                 }
             }
         }
 
 
-        return map;
     }
 
     private int[] findStart(char[][] map) {
@@ -206,7 +208,7 @@ public class Main {
         return start;
     }
 
-    private char[][] bigMap(char[][] map) {
+    private char[][] bigMap(char[][] map, char wallChar, char emptyChar) {
 
         List<Pair<Integer, Integer>> loop = new ArrayList<>();
         List<Pair<Integer, Integer>> left = new ArrayList<>();
@@ -232,7 +234,7 @@ public class Main {
         char[][] bigMap = new char[map.length * 3][map[0].length * 3];
 
         for (char[] chars : bigMap) {
-            Arrays.fill(chars, '.');
+            Arrays.fill(chars, emptyChar);
         }
 
         for (int i = 0; i < loop.size() - 1; i++) {
@@ -248,12 +250,12 @@ public class Main {
             if (x == x2) {
                 //vertical
                 for (int j = Math.min(y, y2); j <= Math.max(y, y2); j++) {
-                    bigMap[x][j] = '+';
+                    bigMap[x][j] = wallChar;
                 }
             } else if (y == y2) {
                 //horizontal
                 for (int j = Math.min(x, x2); j <= Math.max(x, x2); j++) {
-                    bigMap[j][y] = '+';
+                    bigMap[j][y] = wallChar;
                 }
             }
         }
@@ -264,48 +266,48 @@ public class Main {
 
     }
 
+
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_GREEN_BOLD = "\033[1;32m";
 
-    private static void printMap(char[][] map) {
+    private static void printMap(char[][] map, char wallChar, char insideChar, char outsideChar) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < map.length; i++) {
             //print string
             char[] row = map[i];
             for (int j = 0; j < row.length; j++) {
                 char c = row[j];
-                if (c == 'O') {
+                if (c == outsideChar) {
                     sb.append(ANSI_RED);
-                    sb.append("█");
+                    sb.append("O");
                     sb.append(ANSI_RESET);
-                } else if (c == 'I') {
+                } else if (c == insideChar) {
                     sb.append(ANSI_CYAN);
-                    sb.append("█");
+                    sb.append("X");
                     sb.append(ANSI_RESET);
-                } else if (c == '+') {
+                } else if (c == wallChar) {
                     sb.append(ANSI_GREEN_BOLD);
 
                     //if corner append ║
-                    if (map[i-1][j] == '+' && map[i][j-1] == '+') {
+                    if (map[i-1][j] == wallChar && map[i][j-1] == wallChar) {
                         sb.append("╝");
-                    } else if (map[i-1][j] == '+' && map[i][j+1] == '+') {
+                    } else if (map[i-1][j] == wallChar && map[i][j+1] == wallChar) {
                         sb.append("╚");
-                    } else if (map[i+1][j] == '+' && map[i][j-1] == '+') {
+                    } else if (map[i+1][j] == wallChar && map[i][j-1] == wallChar) {
                         sb.append("╗");
-                    } else if (map[i+1][j] == '+' && map[i][j+1] == '+') {
+                    } else if (map[i+1][j] == wallChar && map[i][j+1] == wallChar) {
                         sb.append("╔");
-                    } else if (map[i-1][j] == '+' || map[i+1][j] == '+') {
+                    } else if (map[i-1][j] == wallChar || map[i+1][j] == wallChar) {
                         sb.append("║");
                     } else {
                         sb.append("═");
                     }
 
-
-
-
                     sb.append(ANSI_RESET);
+                } else {
+                    sb.append(" ");
                 }
 
 
