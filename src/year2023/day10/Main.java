@@ -228,7 +228,7 @@ public class Main {
         loop.add(visited.get(0));
 
 
-        //create map where each coordinate is 3x3 and we connect them with `+`
+        //create map where each coordinate is 3x3, and we connect them with `+`
         char[][] bigMap = new char[map.length * 3][map[0].length * 3];
 
         for (char[] chars : bigMap) {
@@ -250,7 +250,7 @@ public class Main {
                 for (int j = Math.min(y, y2); j <= Math.max(y, y2); j++) {
                     bigMap[x][j] = '+';
                 }
-            } else {
+            } else if (y == y2) {
                 //horizontal
                 for (int j = Math.min(x, x2); j <= Math.max(x, x2); j++) {
                     bigMap[j][y] = '+';
@@ -267,29 +267,44 @@ public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_GREEN_BOLD = "\033[1;32m";
 
     private static void printMap(char[][] map) {
         StringBuilder sb = new StringBuilder();
-        for (char[] row : map) {
+        for (int i = 0; i < map.length; i++) {
             //print string
-            for (char c : row) {
+            char[] row = map[i];
+            for (int j = 0; j < row.length; j++) {
+                char c = row[j];
                 if (c == 'O') {
                     sb.append(ANSI_RED);
-                    sb.append(c);
+                    sb.append("█");
                     sb.append(ANSI_RESET);
                 } else if (c == 'I') {
                     sb.append(ANSI_CYAN);
-                    sb.append(c);
+                    sb.append("█");
                     sb.append(ANSI_RESET);
                 } else if (c == '+') {
                     sb.append(ANSI_GREEN_BOLD);
-                    sb.append(c);
-                    sb.append(ANSI_RESET);
-                } else {
-                    sb.append(ANSI_PURPLE);
-                    sb.append(c);
+
+                    //if corner append ║
+                    if (map[i-1][j] == '+' && map[i][j-1] == '+') {
+                        sb.append("╝");
+                    } else if (map[i-1][j] == '+' && map[i][j+1] == '+') {
+                        sb.append("╚");
+                    } else if (map[i+1][j] == '+' && map[i][j-1] == '+') {
+                        sb.append("╗");
+                    } else if (map[i+1][j] == '+' && map[i][j+1] == '+') {
+                        sb.append("╔");
+                    } else if (map[i-1][j] == '+' || map[i+1][j] == '+') {
+                        sb.append("║");
+                    } else {
+                        sb.append("═");
+                    }
+
+
+
+
                     sb.append(ANSI_RESET);
                 }
 
@@ -304,7 +319,7 @@ public class Main {
 
     public char[][] getInput() {
         Utils utils = new Utils();
-        List<String> lines = utils.getLines("src/year2023/day10/input.txt");
+        List<String> lines = utils.getLines("src/year2023/day10/example.txt");
         char[][] map = new char[lines.size()][];
         for (int i = 0; i < lines.size(); i++) {
             map[i] = lines.get(i).toCharArray();
