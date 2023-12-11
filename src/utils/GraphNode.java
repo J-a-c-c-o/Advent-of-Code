@@ -46,6 +46,15 @@ public class GraphNode {
         this.children = children.toArray(new GraphNode[0]);
     }
 
+    public void addChild(GraphNode child) {
+        GraphNode[] newChildren = new GraphNode[children.length + 1];
+        for (int i = 0; i < children.length; i++) {
+            newChildren[i] = children[i];
+        }
+        newChildren[children.length] = child;
+        children = newChildren;
+    }
+
     public GraphNode[] getChildren() {
         return children;
     }

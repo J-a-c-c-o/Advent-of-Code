@@ -63,6 +63,55 @@ public class GraphSearch {
         return null;
     }
 
+    public static List<GraphNode> sortGraphNodes(List<GraphNode> graphNodes, int[] dest) {
+        List<GraphNode> sorted = new ArrayList<>(graphNodes);
+
+        sorted.sort((a, b) -> {
+            int[] aCords = a.getCords();
+            int[] bCords = b.getCords();
+            int aDist = Math.abs(aCords[0] - dest[0]) + Math.abs(aCords[1] - dest[1]);
+            int bDist = Math.abs(bCords[0] - dest[0]) + Math.abs(bCords[1] - dest[1]);
+            return aDist - bDist;
+        });
+
+        return sorted;
+    }
+
+
+    public static List<GraphNode> AStar(GraphNode root, String name, int[] dest) {
+        if (root.getName().equals(name)) {
+            return new ArrayList<>();
+        }
+
+        if (root.hasChildren()) {
+            List<GraphNode> sorted = sortGraphNodes(Arrays.asList(root.getChildren()), dest);
+            for (GraphNode child : sorted) {
+                List<GraphNode> result = AStar(child, name, dest);
+
+                if (result != null) {
+                    result.add(child);
+                    return result;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static List<GraphNode> searchAStar(GraphNode root, String name, int[] dest) {
+        List<GraphNode> result = AStar(root, name, dest);
+        if (result != null) {
+            result.add(root);
+            //reverse the list
+            List<GraphNode> reversed = new ArrayList<>();
+            for (int i = result.size() - 1; i >= 0; i--) {
+                reversed.add(result.get(i));
+            }
+            return reversed;
+        }
+
+        return null;
+    }
+
 
     public static void main(String[] args) {
         // Test
