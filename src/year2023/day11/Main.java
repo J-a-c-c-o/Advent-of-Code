@@ -29,6 +29,8 @@ public class Main {
     public String[][] getInput() {
         List<String> input = utils.getLines("src/year2023/day11/input.txt");
 
+        rootNodes = new ArrayList<>();
+
         // expand the grid every time we see a line with only . then 2x the line
         List<String[]> expandedInput = new ArrayList<>();
         for (String s : input) {
