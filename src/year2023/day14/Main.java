@@ -76,19 +76,17 @@ public class Main {
             cycle();
 
 
-            List<Rock> copyRocks = new ArrayList<>(this.rocks);
-
-            copyRocks.sort((o1, o2) -> {
+            this.rocks.sort((o1, o2) -> {
                 if (o1.y == o2.y) {
                     return o1.x - o2.x;
                 }
                 return o1.y - o2.y;
             });
 
-            if (cachedRocks.containsKey(copyRocks.hashCode())) {
+            if (cachedRocks.containsKey(this.rocks.hashCode())) {
                 System.out.println("Found cycle " + i);
 
-                int cycleStart = cachedRocks.get(copyRocks.hashCode());
+                int cycleStart = cachedRocks.get(this.rocks.hashCode());
                 int cycleLength = i - cycleStart;
                 int cycleOffset = (1000000000 - 1 - cycleStart) % cycleLength;
 
@@ -99,7 +97,7 @@ public class Main {
             }
 
 
-            cachedRocks.put(copyRocks.hashCode(), i);
+            cachedRocks.put(this.rocks.hashCode(), i);
 
 
             i++;
@@ -146,29 +144,39 @@ public class Main {
     private void tilt(Direction direction) {
         boolean done = false;
         while (!done) {
-            List<Boolean> moved = new ArrayList<>();
-
+            boolean movedAny = false;
             for (Rock rock : rocks) {
                 if (rock.c == 'O') {
                     switch (direction) {
-                        case UP -> moved.add(rock.up(rocks));
-                        case DOWN -> moved.add(rock.down(rocks));
-                        case LEFT -> moved.add(rock.left(rocks));
-                        case RIGHT -> moved.add(rock.right(rocks));
+                        case UP -> {
+                            boolean hasMoved = rock.up(rocks);
+                            if (hasMoved) {
+                                movedAny = true;
+                            }
+                        }
+                        case DOWN -> {
+                            boolean hasMoved = rock.down(rocks);
+                            if (hasMoved) {
+                                movedAny = true;
+                            }
+                        }
+                        case LEFT -> {
+                            boolean hasMoved = rock.left(rocks);
+                            if (hasMoved) {
+                                movedAny = true;
+                            }
+                        }
+                        case RIGHT -> {
+                            boolean hasMoved = rock.right(rocks);
+                            if (hasMoved) {
+                                movedAny = true;
+                            }
+                        }
                     }
                 }
             }
 
-
-            boolean allFalse = true;
-            for (Boolean b : moved) {
-                if (b) {
-                    allFalse = false;
-                    break;
-                }
-            }
-
-            if (allFalse) {
+            if (!movedAny) {
                 done = true;
             }
         }
