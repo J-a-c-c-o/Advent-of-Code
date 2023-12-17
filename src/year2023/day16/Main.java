@@ -1,10 +1,7 @@
 package year2023.day16;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import utils.Pair;
 import utils.Utils;
@@ -27,7 +24,7 @@ public class Main {
         System.out.println("Part 2: " + part2 + " took " + part2Time + "ms");
     }
 
-    public HashMap<Pair<Integer,Integer>, Character> getInput() {
+    public Map<Pair<Integer,Integer>, Character> getInput() {
 
         List<String> lines = utils.getLines("src/year2023/day16/input.txt");
         HashMap<Pair<Integer,Integer>, Character> map = new HashMap<>();
@@ -48,23 +45,22 @@ public class Main {
     }
 
     public String part1() {
-        return getEnerginzed(0,0, 'E') + "";
+        return getEnergized(0,0, 'E') + "";
     }
 
-    private int getEnerginzed(int x, int y, char sdir) {
-        HashMap<Pair<Integer,Integer>, Character> map = getInput();
-        List<Pair<Pair<Integer,Integer>, Character>> pairs = new ArrayList<>();
+    private int getEnergized(int x, int y, char dir) {
+        Map<Pair<Integer,Integer>, Character> map = getInput();
+        Set<Pair<Pair<Integer,Integer>, Character>> pairs = new HashSet<>();
 
         Pair<Integer,Integer> cord = new Pair<>(x,y);
-        char dir = sdir;
 
         pairs.add(new Pair<>(cord, dir));
 
-        List<Pair<Pair<Integer,Integer>, Character>> queue = new ArrayList<>();
+        Queue<Pair<Pair<Integer,Integer>, Character>> queue = new LinkedList<>();
         queue.add(new Pair<>(cord, dir));
 
         while (!queue.isEmpty()) {
-            Pair<Pair<Integer,Integer>, Character> pair = queue.remove(0);
+            Pair<Pair<Integer,Integer>, Character> pair = queue.poll();
             cord = pair.x;
             dir = pair.y;
 
@@ -114,6 +110,7 @@ public class Main {
                     }
 
                 }
+
                 if (dir == 'N') {
                     cord = new Pair<>(cord.x, cord.y - 1);
                 } else if (dir == 'E') {
@@ -133,9 +130,9 @@ public class Main {
 
                 if (pairs.contains(new Pair<>(cord, dir))) {
                     break;
-                } else {
-                    pairs.add(new Pair<>(cord, dir));
                 }
+
+                pairs.add(new Pair<>(cord, dir));
 
             }
         }
@@ -160,52 +157,52 @@ public class Main {
 
     public String part2() {
 
-        List<Integer> oldlist = new ArrayList<>();
-        List<Integer> max = Collections.synchronizedList(oldlist);
+
+        List<Integer> max = Collections.synchronizedList(new ArrayList<>());
 
 
         Thread thread1 = new Thread(() -> {
-            int maxEnerginzed = 0;
+            int maxEnergized = 0;
             for (int x = 0; x < maxX; x++) {
-                int energinzed = getEnerginzed(x,0, 'S');
-                if (energinzed > maxEnerginzed) {
-                    maxEnerginzed = energinzed;
+                int energized = getEnergized(x,0, 'S');
+                if (energized > maxEnergized) {
+                    maxEnergized = energized;
                 }
             }
-            max.add(maxEnerginzed);
+            max.add(maxEnergized);
         });
 
         Thread thread2 = new Thread(() -> {
-            int maxEnerginzed = 0;
+            int maxEnergized = 0;
             for (int y = 0; y < maxY; y++) {
-                int energinzed = getEnerginzed(0,y, 'E');
-                if (energinzed > maxEnerginzed) {
-                    maxEnerginzed = energinzed;
+                int energized = getEnergized(0,y, 'E');
+                if (energized > maxEnergized) {
+                    maxEnergized = energized;
                 }
             }
-            max.add(maxEnerginzed);
+            max.add(maxEnergized);
         });
 
         Thread thread3 = new Thread(() -> {
-            int maxEnerginzed = 0;
+            int maxEnergized = 0;
             for (int x = 0; x < maxX; x++) {
-                int energinzed = getEnerginzed(x,maxY - 1, 'N');
-                if (energinzed > maxEnerginzed) {
-                    maxEnerginzed = energinzed;
+                int energized = getEnergized(x,maxY - 1, 'N');
+                if (energized > maxEnergized) {
+                    maxEnergized = energized;
                 }
             }
-            max.add(maxEnerginzed);
+            max.add(maxEnergized);
         });
 
         Thread thread4 = new Thread(() -> {
-            int maxEnerginzed = 0;
+            int maxEnergized = 0;
             for (int y = 0; y < maxY; y++) {
-                int energinzed = getEnerginzed(maxX - 1,y, 'W');
-                if (energinzed > maxEnerginzed) {
-                    maxEnerginzed = energinzed;
+                int energized = getEnergized(maxX - 1,y, 'W');
+                if (energized > maxEnergized) {
+                    maxEnergized = energized;
                 }
             }
-            max.add(maxEnerginzed);
+            max.add(maxEnergized);
         });
 
 
@@ -216,22 +213,37 @@ public class Main {
 
         try {
             thread1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
             thread2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
             thread3.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
             thread4.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        int maxEnerginzed = 0;
+        int maxEnergized = 0;
         for (int i : max) {
-            if (i > maxEnerginzed) {
-                maxEnerginzed = i;
+            if (i > maxEnergized) {
+                maxEnergized = i;
             }
         }
 
 
-        return maxEnerginzed + "";
+        return maxEnergized + "";
     }
 
 
