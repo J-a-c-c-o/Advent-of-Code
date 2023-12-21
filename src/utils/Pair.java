@@ -31,4 +31,12 @@ public class Pair<A, B> {
                 ", y=" + y +
                 '}';
     }
+
+    public A getX() {
+        return x;
+    }
+
+    public B getY() {
+        return y;
+    }
 }
