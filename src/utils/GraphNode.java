@@ -34,6 +34,13 @@ public class GraphNode {
         this.cords = cords;
     }
 
+    public GraphNode(String start, GraphNode parent, Pair<Integer, Integer> cords) {
+        this.name = start;
+        this.parent = parent;
+        this.children = new GraphNode[0];
+        this.cords = new int[]{cords.x, cords.y};
+    }
+
     public int[] getCords() {
         return cords;
     }
