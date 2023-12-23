@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="graphstream.gs.ui.swing" type="repository">
+    <properties maven-id="org.graphstream:gs-ui-swing:2.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/graphstream/gs-ui-swing/2.0/gs-ui-swing-2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
