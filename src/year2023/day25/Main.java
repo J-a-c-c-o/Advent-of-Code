@@ -112,7 +112,7 @@ public class Main {
     }
 
     public String part2() {
-        return "";
+        return "\uD83C\uDF1F\uD83C\uDF1F";
     }
 
 
