@@ -13,6 +13,7 @@
     <orderEntry type="library" name="graphstream.gs.core" level="project" />
     <orderEntry type="library" name="graphstream.gs.algo" level="project" />
     <orderEntry type="library" name="graphstream.gs.ui.swing" level="project" />
+    <orderEntry type="library" name="io.github.tudo.aqua.z3.turnkey" level="project" />
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="715ff033-cae2-418c-9ba2-52eae1d3883a" />
