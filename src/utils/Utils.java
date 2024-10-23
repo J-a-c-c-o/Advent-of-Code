@@ -121,4 +121,21 @@ public class Utils {
         utils.createClass(day, year);
         utils.getInput(Integer.parseInt(day), Integer.parseInt(year));
     }
+
+    public List<String> rotate(List<String> lines) {
+        List<String> rotated = new ArrayList<>();
+
+        if (lines.isEmpty()) {
+            return rotated;
+        }
+
+        for (int i = 0; i < lines.get(0).length(); i++) {
+            StringBuilder sb = new StringBuilder();
+            for (String line : lines) {
+                sb.append(line.charAt(i));
+            }
+            rotated.add(sb.toString());
+        }
+        return rotated;
+    }
 }
