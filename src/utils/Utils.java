@@ -138,4 +138,40 @@ public class Utils {
         }
         return rotated;
     }
+
+
+    public int[][] makeGrid(List<String> lines, String del) {
+        int[][] grid = new int[lines.size()][];
+
+        int i = 0;
+        for (String line : lines) {
+            String[] li = line.split(del);
+            grid[i] = new int[li.length];
+            for (int j = 0; j < li.length; j++) {
+                grid[i][j] = Integer.parseInt(li[j]);
+            }
+
+            i += 1;
+        }
+
+        return grid;
+    }
+
+    public int[][] flipGridX(int[][] grid) {
+        int[][] flipped = new int[grid.length][grid[0].length];
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                flipped[i][j] = grid[i][grid[0].length - j - 1];
+            }
+        }
+        return flipped;
+    }
+
+    public int[][] flipGridY(int[][] grid) {
+        int[][] flipped = new int[grid.length][grid[0].length];
+        for (int i = 0; i < grid.length; i++) {
+            System.arraycopy(grid[grid.length - i - 1], 0, flipped[i], 0, grid[0].length);
+        }
+        return flipped;
+    }
 }

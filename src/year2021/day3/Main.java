@@ -42,8 +42,6 @@ public class Main {
         } else {
             return '1';
         }
-
-
     }
 
     public char leastCommonChar(String s) {
