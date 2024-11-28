@@ -25,7 +25,7 @@ public class Main {
     }
 
     public Pair<String, GridTrench> getInput() {
-        List<String> lines = utils.getLines("src/year2021/day20/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2021/day20/input.txt");
         String algorithm = lines.getFirst();
         List<String> rest = lines.subList(2, lines.size());
         GridTrench grid = new GridTrench();

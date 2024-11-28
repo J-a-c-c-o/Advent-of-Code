@@ -20,7 +20,7 @@ public class Main {
     }
 
     public HashMap<String, Node> getInput() {
-        List<String> input = utils.getLines("src/year2023/day8/input.txt");
+        List<String> input = utils.getLines("src/main/java/year2023/day8/input.txt");
 
 
         path = input.get(0).split("");

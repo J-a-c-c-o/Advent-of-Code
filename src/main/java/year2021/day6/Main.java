@@ -28,7 +28,7 @@ public class Main {
     }
 
     public List<LanternFish> getInput() {
-        String line = utils.getLines("src/year2021/day6/input.txt").get(0);
+        String line = utils.getLines("src/main/java/year2021/day6/input.txt").get(0);
 
         String[] split = line.split(",");
         List<LanternFish> fish = new ArrayList<>();

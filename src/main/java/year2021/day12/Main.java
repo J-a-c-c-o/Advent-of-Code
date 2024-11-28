@@ -22,7 +22,7 @@ public class Main {
     }
 
     public Graph getInput() {
-        List<String> input = utils.getLines("src/year2021/day12/input.txt");
+        List<String> input = utils.getLines("src/main/java/year2021/day12/input.txt");
         Graph graph = new Graph();
 
         for (String line : input) {

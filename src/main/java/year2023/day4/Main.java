@@ -18,7 +18,7 @@ public class Main {
     }
 
     public List<Pair<List<String>, List<String>>> getInput() {
-        List<String> input = utils.getLines("src/year2023/day4/input.txt");
+        List<String> input = utils.getLines("src/main/java/year2023/day4/input.txt");
         List<Pair<List<String>, List<String>>> list = new java.util.ArrayList<>();
         for (String s : input) {
             String split = s.split(": ")[1];

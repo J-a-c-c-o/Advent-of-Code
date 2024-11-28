@@ -28,7 +28,7 @@ public class Main {
     }
 
     public void getInput() {
-        List<String> input = utils.getLines("src/year2023/day20/input.txt");
+        List<String> input = utils.getLines("src/main/java/year2023/day20/input.txt");
 
         for (String line : input) {
             String[] split = line.split("->");

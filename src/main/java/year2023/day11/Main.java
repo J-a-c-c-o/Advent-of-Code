@@ -27,7 +27,7 @@ public class Main {
     }
 
     public String[][] getInput() {
-        List<String> input = utils.getLines("src/year2023/day11/input.txt");
+        List<String> input = utils.getLines("src/main/java/year2023/day11/input.txt");
 
         rootNodes = new ArrayList<>();
 

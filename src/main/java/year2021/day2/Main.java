@@ -24,7 +24,7 @@ public class Main {
     }
 
     public List<Pair<String, Integer>> getInput() {
-        List<String> StringList = utils.getLines("src/year2021/day2/input.txt");
+        List<String> StringList = utils.getLines("src/main/java/year2021/day2/input.txt");
         List<Pair<String, Integer>> res = new ArrayList<>();
         for (String s : StringList) {
             String[] tup = s.split(" ");

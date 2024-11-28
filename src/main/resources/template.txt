@@ -22,7 +22,7 @@ public class Main {
     }
 
     public List<String> getInput() {
-        return utils.getLines("src/yearYEAR/dayDAY/input.txt");
+        return utils.getLines("src/main/java/yearYEAR/dayDAY/input.txt");
     }
 
     public String part1() {

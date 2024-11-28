@@ -26,7 +26,7 @@ public class Main {
     }
 
     public void getInput() {
-        List<String> line = utils.getLines("src/year2023/day22/input.txt");
+        List<String> line = utils.getLines("src/main/java/year2023/day22/input.txt");
         bricks = new ArrayList<>();
         int id = 1;
         for (String s : line) {

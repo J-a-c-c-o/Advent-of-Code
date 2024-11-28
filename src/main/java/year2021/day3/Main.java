@@ -23,11 +23,11 @@ public class Main {
     }
 
     public List<String> getInput() {
-        return utils.rotate(utils.getLines("src/year2021/day3/input.txt"));
+        return utils.rotate(utils.getLines("src/main/java/year2021/day3/input.txt"));
     }
 
     public List<String> getInput2() {
-        return utils.getLines("src/year2021/day3/input.txt");
+        return utils.getLines("src/main/java/year2021/day3/input.txt");
     }
 
 

@@ -25,7 +25,7 @@ public class Main {
     private List<Integer> bingoNum;
     private List<Board> boards;
     public void getInput() {
-        List<String> lines = utils.getLines("src/year2021/day4/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2021/day4/input.txt");
         bingoNum = new ArrayList<>();
         String[] temp = lines.get(0).split(",");
 

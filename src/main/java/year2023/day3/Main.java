@@ -19,7 +19,7 @@ public class Main {
     }
 
     public String[][] getInput() {
-        List<String> input = utils.getLines("src/year2023/day3/input.txt");
+        List<String> input = utils.getLines("src/main/java/year2023/day3/input.txt");
         String[][] map = new String[input.size()][input.get(0).length()];
         for (int i = 0; i < input.size(); i++) {
             String[] split = input.get(i).split("");

@@ -33,7 +33,7 @@ public class Main {
     }
 
     public int[][] getInput() {
-        List<String> lines = utils.getLines("src/year2023/day17/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2023/day17/input.txt");
         int[][] map = new int[lines.size()][lines.get(0).length()];
 
         for (int i = 0; i < lines.size(); i++) {

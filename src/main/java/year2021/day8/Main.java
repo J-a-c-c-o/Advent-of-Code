@@ -25,7 +25,7 @@ public class Main {
     }
 
     public List<Pair<String[], String[]>> getInput() {
-        List<String> lines = utils.getLines("src/year2021/day8/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2021/day8/input.txt");
         List<Pair<String[], String[]>> input = new ArrayList<>();
         for (String line : lines) {
             String[] split = line.split(" \\| ");

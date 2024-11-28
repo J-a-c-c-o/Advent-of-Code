@@ -25,7 +25,7 @@ public class Main {
     }
 
     public List<Scanner> getInput() {
-        List<String> lines =  utils.getLines("src/year2021/day19/input.txt");
+        List<String> lines =  utils.getLines("src/main/java/year2021/day19/input.txt");
         List<String> scannerLines = new ArrayList<>();
         List<Scanner> scanners = new ArrayList<>();
         int i = 0;

@@ -35,7 +35,7 @@ public class Main {
     }
 
     public char[][] getInput() {
-        List<String> lines = utils.getLines("src/year2023/day21/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2023/day21/input.txt");
         char[][] map = new char[lines.size()][lines.get(0).length()];
 
         for (int i = 0; i < lines.size(); i++) {

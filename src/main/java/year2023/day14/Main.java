@@ -29,7 +29,7 @@ public class Main {
     }
 
     public void getInput() {
-        List<String> lines = utils.getLines("src/year2023/day14/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2023/day14/input.txt");
 
         maxY = lines.size();
         maxX = lines.get(0).length();

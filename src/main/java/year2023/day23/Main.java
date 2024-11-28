@@ -29,7 +29,7 @@ public class Main {
     }
 
     public char[][] getInput() {
-        List<String> lines = utils.getLines("src/year2023/day23/example.txt");
+        List<String> lines = utils.getLines("src/main/java/year2023/day23/example.txt");
 
         char[][] map = new char[lines.size()][lines.get(0).length()];
 

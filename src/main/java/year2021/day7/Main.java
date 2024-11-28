@@ -24,7 +24,7 @@ public class Main {
     }
 
     public Pair<List<crab>, Integer> getInput() {
-        String line =  utils.getLines("src/year2021/day7/input.txt").get(0);
+        String line =  utils.getLines("src/main/java/year2021/day7/input.txt").get(0);
         String[] poss = line.split(",");
 
         List<crab> crabs = new ArrayList<>();

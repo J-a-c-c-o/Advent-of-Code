@@ -24,7 +24,7 @@ public class Main {
     }
 
     public List<Pair<Point, Point>> getInput(boolean part1) {
-        List<String> dirs = utils.getLines("src/year2021/day5/input.txt");
+        List<String> dirs = utils.getLines("src/main/java/year2021/day5/input.txt");
         List<Pair<Point, Point>> pairs = new ArrayList<>();
         for (String dir : dirs) {
             String[] temp = dir.split(" -> ");

@@ -24,7 +24,7 @@ public class Main {
     }
 
     public List<String> getInput() {
-        return utils.getLines("src/year2021/day10/input.txt");
+        return utils.getLines("src/main/java/year2021/day10/input.txt");
     }
 
     List<String> incomplete = new ArrayList<>();

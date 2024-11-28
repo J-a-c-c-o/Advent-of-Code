@@ -17,7 +17,7 @@ public class Main {
     }
 
     public List<String> getInput() {
-        return utils.getLines("src/year2023/day1/input.txt");
+        return utils.getLines("src/main/java/year2023/day1/input.txt");
     }
 
     public String part1() {

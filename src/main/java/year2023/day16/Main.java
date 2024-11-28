@@ -26,7 +26,7 @@ public class Main {
 
     public Map<Pair<Integer,Integer>, Character> getInput() {
 
-        List<String> lines = utils.getLines("src/year2023/day16/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2023/day16/input.txt");
         HashMap<Pair<Integer,Integer>, Character> map = new HashMap<>();
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);

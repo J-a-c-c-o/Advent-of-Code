@@ -30,7 +30,7 @@ public class Main {
     }
 
     public void getInput() {
-        List<String> lines = utils.getLines("src/year2023/day19/example.txt");
+        List<String> lines = utils.getLines("src/main/java/year2023/day19/example.txt");
 
         workflows = new HashMap<>();
         ratings = new ArrayList<>();

@@ -28,7 +28,7 @@ public class Main {
     }
 
     public List<Quad<Pair<Integer,Integer>,Pair<Integer,Integer>,Pair<Integer,Integer>, Integer>> getInput() {
-        List<String> input =utils.getLines("src/year2021/day22/input.txt");
+        List<String> input =utils.getLines("src/main/java/year2021/day22/input.txt");
         List<Quad<Pair<Integer,Integer>,Pair<Integer,Integer>,Pair<Integer,Integer>, Integer>> steps = new ArrayList<>();
         for (String line : input) {
             String[] parts = line.split(" ");

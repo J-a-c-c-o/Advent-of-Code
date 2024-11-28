@@ -24,7 +24,7 @@ public class Main {
     }
 
     public int[][] getInput() {
-        return utils.makeGrid(utils.getLines("src/year2021/day11/input.txt"),"");
+        return utils.makeGrid(utils.getLines("src/main/java/year2021/day11/input.txt"),"");
     }
 
     public String part1() {

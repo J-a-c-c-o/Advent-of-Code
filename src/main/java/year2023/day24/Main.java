@@ -24,7 +24,7 @@ public class Main {
     }
 
     public double[][] getInput() {
-        List<String> lines = utils.getLines("src/year2023/day24/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2023/day24/input.txt");
 
         double[][] hailStones = new double[lines.size()][6];
         int i = 0;

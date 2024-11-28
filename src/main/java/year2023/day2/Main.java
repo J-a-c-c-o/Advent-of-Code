@@ -18,7 +18,7 @@ public class Main {
     }
 
     public List<List<List<List<List<String>>>>> getInput() {
-        List<String> list = utils.getLines("src/year2023/day2/input.txt");
+        List<String> list = utils.getLines("src/main/java/year2023/day2/input.txt");
 
         List<List<List<List<List<String>>>>> input = new ArrayList<>();
         for (String s : list) {

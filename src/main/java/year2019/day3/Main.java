@@ -18,7 +18,7 @@ public class Main {
     }
 
     public List<List<String>> getInput() {
-        List<String> numbers = utils.getLines("src/year2019/day3/input.txt");
+        List<String> numbers = utils.getLines("src/main/java/year2019/day3/input.txt");
         List<String> split = Arrays.stream(numbers.get(0).split(",")).toList();
         List<String> split2 = Arrays.stream(numbers.get(1).split(",")).toList();
 

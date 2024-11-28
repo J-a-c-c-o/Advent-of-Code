@@ -24,7 +24,7 @@ public class Main {
     }
 
     public String[] getInput() {
-        List<String> lines = utils.getLines("src/year2023/day15/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2023/day15/input.txt");
         String line = lines.get(0);
         return line.split(",");
     }

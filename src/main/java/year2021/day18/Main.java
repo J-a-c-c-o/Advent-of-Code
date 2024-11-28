@@ -24,7 +24,7 @@ public class Main {
     }
 
     public List<String> getInput() {
-        return new ArrayList<>(utils.getLines("src/year2021/day18/input.txt"));
+        return new ArrayList<>(utils.getLines("src/main/java/year2021/day18/input.txt"));
     }
 
     public String part1() {

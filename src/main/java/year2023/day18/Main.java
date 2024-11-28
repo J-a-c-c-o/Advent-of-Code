@@ -26,7 +26,7 @@ public class Main {
     }
 
     public List<Pair<Character, Integer>> getInput(boolean part1) {
-        List<String> lines = utils.getLines("src/year2023/day18/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2023/day18/input.txt");
 
         List<Pair<Character, Integer>> instructions = new ArrayList<>();
 

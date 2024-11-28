@@ -25,7 +25,7 @@ public class Main {
     }
 
     public Pair<int[][], List<Pair<Character, Integer>>> getInput() {
-        List<String> lines = utils.getLines("src/year2021/day13/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2021/day13/input.txt");
         //get line number that is empty
         int lineNum = 0;
         for (int i = 0; i < lines.size(); i++) {

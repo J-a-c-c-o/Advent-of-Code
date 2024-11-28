@@ -27,7 +27,7 @@ public class Main {
     }
 
     public Pair<HashMap<String, String>, String> getInput() {
-        List<String> lines = utils.getLines("src/year2021/day14/input.txt");
+        List<String> lines = utils.getLines("src/main/java/year2021/day14/input.txt");
         HashMap<String, String> map = new HashMap<>();
         String init = lines.get(0);
 

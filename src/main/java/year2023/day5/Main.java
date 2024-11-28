@@ -19,7 +19,7 @@ public class Main {
     }
 
     public List<List<String>> getInput() {
-        List<String> input = utils.getLines("src/year2023/day5/input.txt");
+        List<String> input = utils.getLines("src/main/java/year2023/day5/input.txt");
         String[] tempSeeds = input.get(0).split(" ");
 
 

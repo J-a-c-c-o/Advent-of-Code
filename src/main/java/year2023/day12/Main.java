@@ -28,7 +28,7 @@ public class Main {
     }
 
     public List<Pair<char[], long[]>> getInput() {
-        List<String> input = utils.getLines("src/year2023/day12/input.txt");
+        List<String> input = utils.getLines("src/main/java/year2023/day12/input.txt");
 
         List<Pair<char[], long[]>> pairs = new ArrayList<>();
 
