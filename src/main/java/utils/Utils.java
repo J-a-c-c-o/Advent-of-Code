@@ -11,11 +11,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import static java.net.http.HttpRequest.newBuilder;
 
 public class Utils {
+
+    public static final String LOCSRC = "src/main/java";
+    private static final String LOCRESOURCES = "src/main/resources";
+
     public List<String> getLines(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             return reader.lines().toList();
@@ -57,14 +62,18 @@ public class Utils {
 
     //api aoc
     public void getInput(int day, int year) {
-        String token_path = "src/token.txt";
+        String token_path = LOCRESOURCES + "/token.txt";
         //get token from file
         String session = "";
         try {
             Scanner scanner = new Scanner(new File(token_path));
             session = scanner.nextLine();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Could not read token file");
+        } catch (NoSuchElementException e) {
+            System.out.println("Token file is empty");
+            System.out.println("Please add your session token to the file located at " + token_path);
+            session = "";
         }
 
 
@@ -84,7 +93,7 @@ public class Utils {
                     .header("Cookie", String.format("session=%s", session))
                     .build();
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            Files.writeString(Path.of(String.format("src/year%d/day%d/input.txt", year, day)), response.body());
+            Files.writeString(Path.of(String.format(LOCSRC + "/year%d/day%d/input.txt", year, day)), response.body());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -92,19 +101,18 @@ public class Utils {
 
     public void createClass(String day, String year) {
         try {
-            String content = Files.readString(Path.of("src/template.txt")).replace("DAY", day).replace("YEAR", year);
-            String dir = String.format("./src/year%s/day%s", year, day);
+            String content = Files.readString(Path.of(LOCRESOURCES + "/template.txt")).replace("DAY", day).replace("YEAR", year);
+            String dir = String.format(LOCSRC + "/year%s/day%s", year, day);
             File file = new File(dir);
             if (file.mkdirs()) {
                 System.out.println("Directory created");
             } else {
                 System.out.println("Directory already exists");
+                return;
             }
             // convert to package
-
-
-            Files.writeString(Path.of(String.format("./src/year%s/day%s/Main.java", year, day)), content);
-            Files.writeString(Path.of(String.format("./src/year%s/day%s/example.txt", year, day)), "");
+            Files.writeString(Path.of(String.format(LOCSRC + "/year%s/day%s/Main.java", year, day)), content);
+            Files.writeString(Path.of(String.format(LOCSRC + "/year%s/day%s/example.txt", year, day)), "");
         } catch (IOException e) {
             System.out.println("error" + e.getMessage());
         }
