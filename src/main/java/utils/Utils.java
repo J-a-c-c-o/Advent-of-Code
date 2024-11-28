@@ -73,6 +73,7 @@ public class Utils {
         } catch (NoSuchElementException e) {
             System.out.println("Token file is empty");
             System.out.println("Please add your session token to the file located at " + token_path);
+            System.out.println("If the file does not exist, create it");
             session = "";
         }
 
