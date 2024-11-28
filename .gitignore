@@ -1,3 +1,4 @@
-/out/production/AOC/
 /src/token.txt
-/.idea/sonarlint/
+/.idea/
+/out/
+AOC.iml

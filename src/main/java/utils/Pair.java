@@ -39,4 +39,12 @@ public class Pair<A, B> {
     public B getY() {
         return y;
     }
+
+    public A getFirst() {
+        return x;
+    }
+
+    public B getSecond() {
+        return y;
+    }
 }

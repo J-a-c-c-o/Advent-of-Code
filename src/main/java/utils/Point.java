@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Point {
@@ -21,7 +22,8 @@ public class Point {
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        int[] arr = {x, y};
+        return Arrays.hashCode(arr);
     }
 
     @Override

@@ -3,6 +3,8 @@ package utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.SingleGraph;
 
 public class Graph {
     private Set<Node> nodes;
@@ -250,6 +252,39 @@ public class Graph {
 
 
         return graph;
+    }
+
+    public void visualize(boolean displayEdgeNames, boolean displayNodeNames) {
+        System.setProperty("org.graphstream.ui", "swing");
+        org.graphstream.graph.Graph graph = new SingleGraph("Graph");
+        for (Node node : nodes) {
+            graph.addNode(node.getName());
+
+            if (displayNodeNames) {
+                graph.getNode(node.getName()).setAttribute("ui.label", node.getName());
+                // text color red
+                graph.getNode(node.getName()).setAttribute("ui.style", "text-color: red;");
+                // node color green
+                graph.getNode(node.getName()).setAttribute("ui.style", "fill-color: green;");
+            }
+        }
+
+        for (Node node : nodes) {
+            for (Node other : node.getConnected()) {
+                if (node.getName().compareTo(other.getName()) < 0) {
+                    graph.addEdge(node.getName() + "---" + other.getName(), node.getName(), other.getName());
+
+                    if (displayEdgeNames) {
+                        graph.getEdge(node.getName() + "---" + other.getName()).setAttribute("ui.label", node.getName() + "---" + other.getName());
+                        // color red
+                        graph.getEdge(node.getName() + "---" + other.getName()).setAttribute("ui.style", "text-color: red;");
+                    }
+                }
+            }
+        }
+
+
+        graph.display();
     }
 
     @Override

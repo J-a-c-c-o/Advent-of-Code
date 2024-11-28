@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Triple<T, U, V> {
     public final T x;
     public final U y;
-    public final V z;
+    public V z;
 
     public Triple(T first, U second, V third) {
         this.x = first;
@@ -16,7 +16,7 @@ public class Triple<T, U, V> {
 
     @Override
     public String toString() {
-        return "(" + x + ", " + y + ", " + x + ")";
+        return "(" + x + ", " + y + ", " + z + ")";
     }
 
     @Override
@@ -29,5 +29,21 @@ public class Triple<T, U, V> {
     @Override
     public int hashCode() {
         return Objects.hash(x, y, z);
+    }
+
+    public T getFirst() {
+        return x;
+    }
+
+    public U getSecond() {
+        return y;
+    }
+
+    public V getThird() {
+        return z;
+    }
+
+    public void setThird(V b) {
+        this.z = b;
     }
 }
