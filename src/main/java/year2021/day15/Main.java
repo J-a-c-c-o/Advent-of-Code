@@ -29,7 +29,7 @@ public class Main {
         int[][] input = getInput();
         int sum = calculateRisk(input);
 
-        return STR."\{sum}";
+        return String.valueOf(sum);
     }
 
     public String part2() {
@@ -60,7 +60,7 @@ public class Main {
 
         int sum = calculateRisk(newInput);
 
-        return STR."\{sum}";
+        return String.valueOf(sum);
 
 
     }

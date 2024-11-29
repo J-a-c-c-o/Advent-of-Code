@@ -289,6 +289,8 @@ public class Graph {
 
     @Override
     public String toString() {
-        return STR."Graph{nodes=\{nodes}\{'}'}";
+        return "Graph{" +
+                "nodes=" + nodes +
+                '}';
     }
 }
