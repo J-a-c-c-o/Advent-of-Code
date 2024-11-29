@@ -5,11 +5,15 @@
 
 Welcome to my solutions for the [Advent of Code](https://adventofcode.com/) challenges! This repository contains my Java solutions for the puzzles, along with utility classes to streamline the process of solving the challenges.
 
+---
+
 ## 📝 About Advent of Code
 Advent of Code is an annual programming event in December, where participants solve a series of holiday-themed puzzles. It is a great opportunity to:
 - Sharpen programming skills 🛠️
 - Explore new algorithms and data structures 🧩
 - Having fun and learning new things! 🎉
+
+---
 
 ## 📈 Progress 2024
 | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
@@ -20,7 +24,7 @@ Advent of Code is an annual programming event in December, where participants so
 | Day 16 <br> ⏳⏳ | Day 17 <br> ⏳⏳  | Day 18 <br> ⏳⏳  | Day 19 <br> ⏳⏳  | Day 20 <br> ⏳⏳  | Day 21 <br> ⏳⏳  | Day 22 <br> ⏳⏳  |
 | Day 23 <br> ⏳⏳ |  Day 24 <br> ⏳⏳  |   Day 25 <br> ⏳⏳ |   |   |
 
-
+---
 
 ## 🧠 Challenges Solved
 
