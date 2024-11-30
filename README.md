@@ -91,7 +91,9 @@ Advent of Code is an annual programming event in December, where participants so
 ## 📂 Repository Structure
 Each day of the challenge is organized into its own directory:
 ```
-Advent-of-Code/src/main/java
+Advent-of-Code/src/main/java/nl/jtepoel/AOC
+├───Main.java
+│
 ├───utils
 │       Edge.java
 │       FrequencySet.java
@@ -180,32 +182,36 @@ Keep your session token **secret** and **never share** it publicly!
 
 ### 🌟 Create a New Day
 
-You can use the `Utils.java` class to automate the setup for a new day.
+To automate the process of creating a new day, you can use `Main.java` to generate the necessary files and directories.
 
 ### Steps:
 1. **Ensure your token is available**:
     follow the instructions in the **[Token Configuration](#-Token-Configuration)** section to set up your session token.
 
 
-2. **Run the `Utils.java` class**:
+2. **Run the `Main.java` class**:
     ```bash
-    mvn exec:java -Dexec.mainClass="src.main.java.utils.Utils"
+    mvn exec:java
     ```
+   
+   After running the class, you will be prompted to select which mode you want to run:
+   Select `create` to create a new day.
+
     - It will:
         - Create a new directory for the day under the relevant year.
         - Fetch the input for the day's puzzle (if the token is valid).
         - Generate the necessary files, including `example.txt`, `input.txt`, and a `Main.java` template.
 
-3. **Add your solution**:
-    - Write your solution logic in `Main.java`.
-
 
 
 ### Run a Solution
-Run the solution using Maven (replace `2023` and `1` with the relevant year and day numbers):
+Run the solution using Maven:
    ```bash
-   mvn exec:java -Dexec.mainClass="src.main.java.year2023.day1.Main"
+   mvn exec:java
    ```
+
+ You will be prompted to select which mode you want to run:
+ Select `run` to run the solution for a specific day.
 
 ---
 

@@ -1,4 +1,4 @@
-package nl.jtepoel.AOC.yearYEAR.dayDAY;
+package nl.jtepoel.AOC.year2021.day21;
 
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class Main {
     }
 
     public List<String> getInput() {
-        return utils.getLines(Utils.LOCSRC + "/yearYEAR/dayDAY/input.txt");
+        return utils.getLines(Utils.LOCSRC + "/year2021/day21/input.txt");
     }
 
     public String part1() {
