@@ -74,20 +74,6 @@ public class Utils {
             session = "";
         }
 
-
-
-        if (Files.exists(Path.of(String.format("input%d.txt", day)))) {
-            //remove file
-            try {
-                Files.delete(Path.of(String.format("input%d.txt", day)));
-            } catch (IOException e) {
-                System.out.println("Could not delete file");
-                return;
-            }
-        } else {
-            System.out.println("Downloading input file...");
-        }
-
         String url = String.format("https://adventofcode.com/%d/day/%d/input", year, day);
 
         try {
