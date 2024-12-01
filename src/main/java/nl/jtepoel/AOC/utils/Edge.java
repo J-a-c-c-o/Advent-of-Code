@@ -7,10 +7,27 @@ public class Edge {
     private final Node B;
     private int weight;
 
+    private String name;
+
     public Edge(Node A, Node B, int weight) {
         this.A = A;
         this.B = B;
         this.weight = weight;
+    }
+
+    public Edge(Node A, Node B, int weight, String name) {
+        this.A = A;
+        this.B = B;
+        this.weight = weight;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Node getA() {

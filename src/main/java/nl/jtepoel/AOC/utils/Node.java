@@ -44,6 +44,15 @@ public class Node {
         edges.remove(edge);
     }
 
+    public void removeEdge(Node node) {
+        for (Edge edge : edges) {
+            if (edge.hasNode(node)) {
+                edges.remove(edge);
+                return;
+            }
+        }
+    }
+
     public boolean hasEdge(Edge edge) {
         return edges.contains(edge);
     }

@@ -33,6 +33,9 @@ public class Graph {
     }
 
     public void removeNode(Node node) {
+        for (Node other : node.getConnected()) {
+            other.removeEdge(node);
+        }
         nodes.remove(node);
     }
 
@@ -75,8 +78,18 @@ public class Graph {
         addEdge(edge);
     }
 
+    public void addEdge(Node A, Node B, int weight, String name) {
+        Edge edge = new Edge(A, B, weight, name);
+        addEdge(edge);
+    }
+
     public void addEdgeDir(Node A, Node B, int weight) {
         Edge edge = new Edge(A, B, weight);
+        addEdgeDir(edge);
+    }
+
+    public void addEdgeDir(Node A, Node B, int weight, String name) {
+        Edge edge = new Edge(A, B, weight, name);
         addEdgeDir(edge);
     }
 
@@ -245,7 +258,7 @@ public class Graph {
         for (Edge edge : edges) {
             Node A = graph.getNode(edge.getA().getName());
             Node B = graph.getNode(edge.getB().getName());
-            graph.addEdge(A, B, edge.getWeight());
+            graph.addEdge(A, B, edge.getWeight(), edge.getName());
         }
 
 
@@ -284,6 +297,60 @@ public class Graph {
 
         graph.display();
     }
+
+    public Set<String> minCut() {
+        Graph graph = this.copy();
+
+        while (graph.size() > 2) {
+            Edge edge = graph.getRandomEdge();
+            Node A = edge.getA();
+            Node B = edge.getB();
+            graph.removeNode(A);
+            graph.removeNode(B);
+            Node newNode = new Node(new ArrayList<>(), A.getName() + B.getName());
+            graph.addNode(newNode);
+
+            for (Edge e : A.getEdges()) {
+                if (e.getOtherNode(A).equals(B)) {
+                    continue;
+                }
+                Node other = e.getOtherNode(A);
+                graph.addEdge(newNode, other, e.getWeight(), e.getName());
+            }
+
+            for (Edge e : B.getEdges()) {
+                if (e.getOtherNode(B).equals(A)) {
+                    continue;
+                }
+                Node other = e.getOtherNode(B);
+                graph.addEdge(newNode, other, e.getWeight(), e.getName());
+            }
+        }
+
+        Set<String> cuts = new HashSet<>();
+        for (Node node : graph.nodes) {
+            System.out.println(node.getEdges());
+            for (Edge edge : node.getEdges()) {
+                cuts.add(edge.getName());
+            }
+        }
+
+        return cuts;
+
+    }
+
+    private Edge getRandomEdge() {
+        Set<Edge> edges = new HashSet<>();
+        for (Node node : nodes) {
+            edges.addAll(node.getEdges());
+        }
+        List<Edge> edgeList = new ArrayList<>(edges);
+        Collections.shuffle(edgeList);
+        return edgeList.getFirst();
+    }
+
+
+
 
     @Override
     public String toString() {
