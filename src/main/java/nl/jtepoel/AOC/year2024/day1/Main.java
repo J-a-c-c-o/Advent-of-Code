@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import nl.jtepoel.AOC.utils.FrequencySet;
 import nl.jtepoel.AOC.utils.Pair;
 import nl.jtepoel.AOC.utils.Utils;
 
@@ -54,20 +55,12 @@ public class Main {
 
     public String part2() {
         Pair<List<Integer>, List<Integer>> input = getInput();
-        List<Integer> left = input.getLeft();
-        List<Integer> right = input.getRight();
+
+        FrequencySet<Integer> left = new FrequencySet<>(input.getLeft());
 
         int intersection = 0;
-        for (int l : left) {
-            if (right.contains(l)) {
-                int count = 0;
-                for (int r : right) {
-                    if (r == l) {
-                        count++;
-                    }
-                }
-                intersection += l * count;
-            }
+        for (int r : input.getRight()) {
+            intersection += r * left.get(r);
         }
 
         return String.valueOf(intersection);
