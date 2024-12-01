@@ -2,8 +2,6 @@ package nl.jtepoel.AOC.utils;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
 public class FrequencySet<A> extends HashMap<A, Integer> {
 
