@@ -16,12 +16,12 @@ Advent of Code is an annual programming event in December, where participants so
 ---
 
 ## 📈 Progress 2024
-| Mon | Tue | Wed | Thu | Fri | Sat | Sun |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|  |   |   |   |  |  | Day 1 <br> ⏳⏳  |
+| Mon | Tue | Wed | Thu | Fri | Sat |      Sun       |
+|:---:|:---:|:---:|:---:|:---:|:---:|:--------------:|
+|  |   |   |   |  |  |  Day 1 <br> ⭐⭐  |
 | Day 2 <br> ⏳⏳ | Day 3 <br> ⏳⏳  | Day 4 <br> ⏳⏳  | Day 5 <br> ⏳⏳  | Day 6 <br> ⏳⏳  | Day 7 <br> ⏳⏳  | Day 8 <br> ⏳⏳  |
-| Day 9 <br> ⏳⏳ | Day 10 <br> ⏳⏳  | Day 11 <br> ⏳⏳  | Day 12 <br> ⏳⏳  | Day 13 <br> ⏳⏳  | Day 14 <br> ⏳⏳  | Day 15 <br> ⏳⏳  |
-| Day 16 <br> ⏳⏳ | Day 17 <br> ⏳⏳  | Day 18 <br> ⏳⏳  | Day 19 <br> ⏳⏳  | Day 20 <br> ⏳⏳  | Day 21 <br> ⏳⏳  | Day 22 <br> ⏳⏳  |
+| Day 9 <br> ⏳⏳ | Day 10 <br> ⏳⏳  | Day 11 <br> ⏳⏳  | Day 12 <br> ⏳⏳  | Day 13 <br> ⏳⏳  | Day 14 <br> ⏳⏳  | Day 15 <br> ⏳⏳ |
+| Day 16 <br> ⏳⏳ | Day 17 <br> ⏳⏳  | Day 18 <br> ⏳⏳  | Day 19 <br> ⏳⏳  | Day 20 <br> ⏳⏳  | Day 21 <br> ⏳⏳  | Day 22 <br> ⏳⏳ |
 | Day 23 <br> ⏳⏳ |  Day 24 <br> ⏳⏳  |   Day 25 <br> ⏳⏳ |   |   |
 
 ---
@@ -29,61 +29,62 @@ Advent of Code is an annual programming event in December, where participants so
 ## 🧠 Challenges Solved
 
 | Year | Day | Title                              | Difficulty |
-|------|-----|------------------------------------|-----------|
-| 2019 | 1   | The Tyranny of the Rocket Equation | ⭐         |
-| 2019 | 2   | 1202 Program Alarm                 | ⭐⭐        |
-| 2019 | 3   | Crossed Wires                      | ⭐⭐        |
-| 2019 | 4   | Secure Container                   | ⭐         |
-| 2019 | ... | ...                                | ...       |
-| 2010 | ... | ...                                | ...       |
-| 2021 | 1   | Sonar Sweep                        | ⭐         |
-| 2021 | 2   | Dive!                              | ⭐         |
-| 2021 | 3   | Binary Diagnostic                  | ⭐⭐        |
-| 2021 | 4   | Giant Squid                        | ⭐⭐        |
-| 2021 | 5   | Hydrothermal Venture               | ⭐         |
-| 2021 | 6   | Lanternfish                        | ⭐         |
-| 2021 | 7   | The Treachery of Whales            | ⭐         |
-| 2021 | 8   | Seven Segment Search               | ⭐⭐⭐       |
-| 2021 | 9   | Smoke Basin                        | ⭐⭐        |
-| 2021 | 10  | Syntax Scoring                     | ⭐         |
-| 2021 | 11  | Dumbo Octopus                      | ⭐         |
-| 2021 | 12  | Passage Pathing                    | ⭐⭐        |
-| 2021 | 13  | Transparent Origami                | ⭐         |
-| 2021 | 14  | Extended Polymerization            | ⭐⭐        |
-| 2021 | 15  | Chiton                             | ⭐⭐        |
-| 2021 | 16  | Packet Decoder                     | ⭐⭐⭐       |
-| 2021 | 17  | Trick Shot                         | ⭐⭐        |
-| 2021 | 18  | Snailfish                          | ⭐⭐⭐⭐      |
-| 2021 | 19  | Beacon Scanner                     | ⭐⭐⭐⭐      |
-| 2021 | 20  | Trench Map                         | ⭐⭐        |
-| 2021 | 21  | Dirac Dice                         | ⭐⭐⭐       |
-| 2022 | ... | ...                                | ...       |
-| 2021 | ... | ...                                | ...       |
-| 2023 | 1   | Trebuchet?!                        | ⭐⭐        |
-| 2023 | 2   | Cube Conundrum                     | ⭐         |
-| 2023 | 3   | Gear Ratios                        | ⭐⭐        |
-| 2023 | 4   | Scratchcards                       | ⭐         |
-| 2023 | 5   | If You Give A Seed A Fertilizer    | ⭐⭐⭐       |
-| 2023 | 6   | Wait For It                        | ⭐         |
-| 2023 | 7   | Camel Cards                        | ⭐⭐        |
-| 2023 | 8   | Haunted Wasteland                  | ⭐⭐        |
-| 2023 | 9   | Mirage Maintenance                 | ⭐         |
-| 2023 | 10  | Pipe Maze                          | ⭐⭐⭐⭐      |
-| 2023 | 11  | Cosmic Expansion                   | ⭐⭐        |
-| 2023 | 12  | Hot Springs                        | ⭐⭐⭐⭐      |
-| 2023 | 13  | Point of Incidence                 | ⭐⭐        |
-| 2023 | 14  | Parabolic Reflector Dish           | ⭐⭐⭐       |
-| 2023 | 15  | Lens Library                       | ⭐⭐        |
-| 2023 | 16  | The Floor Will Be Lava             | ⭐⭐        |
-| 2023 | 17  | Clumsy Crucible                    | ⭐⭐⭐       |
-| 2023 | 18  | Lavaduct Lagoon                    | ⭐⭐⭐⭐      |
-| 2023 | 19  | Aplenty                            | ⭐⭐        |
-| 2023 | 20  | Pulse Propagation                  | ⭐⭐⭐⭐      |
-| 2023 | 21  | Step Counter                       | ⭐⭐⭐⭐⭐     |
-| 2023 | 22  | Sand Slabs                         | ⭐⭐⭐       |
-| 2023 | 23  | A Long Walk                        | ⭐⭐⭐⭐      |
+|------|-----|------------------------------------|------------|
+| 2019 | 1   | The Tyranny of the Rocket Equation | ⭐          |
+| 2019 | 2   | 1202 Program Alarm                 | ⭐⭐         |
+| 2019 | 3   | Crossed Wires                      | ⭐⭐         |
+| 2019 | 4   | Secure Container                   | ⭐          |
+| 2019 | ... | ...                                | ...        |
+| 2010 | ... | ...                                | ...        |
+| 2021 | 1   | Sonar Sweep                        | ⭐          |
+| 2021 | 2   | Dive!                              | ⭐          |
+| 2021 | 3   | Binary Diagnostic                  | ⭐⭐         |
+| 2021 | 4   | Giant Squid                        | ⭐⭐         |
+| 2021 | 5   | Hydrothermal Venture               | ⭐          |
+| 2021 | 6   | Lanternfish                        | ⭐          |
+| 2021 | 7   | The Treachery of Whales            | ⭐          |
+| 2021 | 8   | Seven Segment Search               | ⭐⭐⭐        |
+| 2021 | 9   | Smoke Basin                        | ⭐⭐         |
+| 2021 | 10  | Syntax Scoring                     | ⭐          |
+| 2021 | 11  | Dumbo Octopus                      | ⭐          |
+| 2021 | 12  | Passage Pathing                    | ⭐⭐         |
+| 2021 | 13  | Transparent Origami                | ⭐          |
+| 2021 | 14  | Extended Polymerization            | ⭐⭐         |
+| 2021 | 15  | Chiton                             | ⭐⭐         |
+| 2021 | 16  | Packet Decoder                     | ⭐⭐⭐        |
+| 2021 | 17  | Trick Shot                         | ⭐⭐         |
+| 2021 | 18  | Snailfish                          | ⭐⭐⭐⭐       |
+| 2021 | 19  | Beacon Scanner                     | ⭐⭐⭐⭐       |
+| 2021 | 20  | Trench Map                         | ⭐⭐         |
+| 2021 | 21  | Dirac Dice                         | ⭐⭐⭐        |
+| 2022 | ... | ...                                | ...        |
+| 2021 | ... | ...                                | ...        |
+| 2023 | 1   | Trebuchet?!                        | ⭐⭐         |
+| 2023 | 2   | Cube Conundrum                     | ⭐          |
+| 2023 | 3   | Gear Ratios                        | ⭐⭐         |
+| 2023 | 4   | Scratchcards                       | ⭐          |
+| 2023 | 5   | If You Give A Seed A Fertilizer    | ⭐⭐⭐        |
+| 2023 | 6   | Wait For It                        | ⭐          |
+| 2023 | 7   | Camel Cards                        | ⭐⭐         |
+| 2023 | 8   | Haunted Wasteland                  | ⭐⭐         |
+| 2023 | 9   | Mirage Maintenance                 | ⭐          |
+| 2023 | 10  | Pipe Maze                          | ⭐⭐⭐⭐       |
+| 2023 | 11  | Cosmic Expansion                   | ⭐⭐         |
+| 2023 | 12  | Hot Springs                        | ⭐⭐⭐⭐       |
+| 2023 | 13  | Point of Incidence                 | ⭐⭐         |
+| 2023 | 14  | Parabolic Reflector Dish           | ⭐⭐⭐        |
+| 2023 | 15  | Lens Library                       | ⭐⭐         |
+| 2023 | 16  | The Floor Will Be Lava             | ⭐⭐         |
+| 2023 | 17  | Clumsy Crucible                    | ⭐⭐⭐        |
+| 2023 | 18  | Lavaduct Lagoon                    | ⭐⭐⭐⭐       |
+| 2023 | 19  | Aplenty                            | ⭐⭐         |
+| 2023 | 20  | Pulse Propagation                  | ⭐⭐⭐⭐       |
+| 2023 | 21  | Step Counter                       | ⭐⭐⭐⭐⭐      |
+| 2023 | 22  | Sand Slabs                         | ⭐⭐⭐        |
+| 2023 | 23  | A Long Walk                        | ⭐⭐⭐⭐       |
 | 2023 | 24  | Never Tell Me The Odds             | ⭐⭐⭐⭐       |
-| 2023 | 25  | Snowverload                        | ⭐⭐⭐⭐      |
+| 2023 | 25  | Snowverload                        | ⭐⭐⭐⭐       |
+| 2024 | 1   | Historian Hysteria                 | ⭐          |
 
 ---
 

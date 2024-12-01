@@ -47,4 +47,12 @@ public class Pair<A, B> {
     public B getSecond() {
         return y;
     }
+
+    public A getLeft() {
+        return x;
+    }
+
+    public B getRight() {
+        return y;
+    }
 }
