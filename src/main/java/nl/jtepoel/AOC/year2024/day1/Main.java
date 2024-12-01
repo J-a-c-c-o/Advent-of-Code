@@ -57,11 +57,7 @@ public class Main {
         Pair<List<Integer>, List<Integer>> input = getInput();
 
         FrequencySet<Integer> left = new FrequencySet<>(input.getLeft());
-
-        int intersection = 0;
-        for (int r : input.getRight()) {
-            intersection += r * left.get(r);
-        }
+        int intersection = input.getRight().stream().mapToInt(r -> r * left.get(r)).sum();
 
         return String.valueOf(intersection);
     }
