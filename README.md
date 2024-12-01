@@ -1,7 +1,7 @@
 # Advent of Code 🎄
 
 ![Language](https://img.shields.io/badge/Language-Java-orange?style=flat-square)
-![Days Completed](https://img.shields.io/badge/Days%20Completed-50-blue?style=flat-square)
+![Days Completed](https://img.shields.io/badge/Days%20Completed-51-blue?style=flat-square)
 
 Welcome to my solutions for the [Advent of Code](https://adventofcode.com/) challenges! This repository contains my Java solutions for the puzzles, along with utility classes to streamline the process of solving the challenges.
 
