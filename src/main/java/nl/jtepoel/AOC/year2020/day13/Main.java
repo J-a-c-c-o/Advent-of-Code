@@ -50,14 +50,8 @@ public class Main {
     public String part2() {
         List<String> lines = getInput();
         String[] split = lines.get(1).split(",");
-        List<Long> buses = new ArrayList<>();
-        for (String s : split) {
-            if (Objects.equals(s, "x")) {
-                continue;
-            }
-            buses.add(Long.parseLong(s));
-        }
 
+        List<Long> buses = new ArrayList<>();
         List<Long> waitTime = new ArrayList<>();
 
         for (int i = 0; i < split.length; i++) {
@@ -65,7 +59,9 @@ public class Main {
             if (Objects.equals(bus, "x")) {
                 continue;
             }
-            waitTime.add(Long.parseLong(bus) - i);
+            long longBus = Long.parseLong(bus);
+            buses.add(longBus);
+            waitTime.add(longBus - i);
         }
         return String.valueOf(utils.chineseRemainder(buses, waitTime));
         
