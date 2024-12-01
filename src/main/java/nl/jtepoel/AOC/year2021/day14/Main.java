@@ -94,8 +94,8 @@ public class Main {
             String sub = init.substring(j-1, j + 1);
             if (map.containsKey(sub)) {
                 freq.addAll(calculate(map.get(sub), map, cache, depth - 1));
-                freq.reduce(init.charAt(j));
-                freq.reduce(init.charAt(j-1));
+                freq.decrement(init.charAt(j));
+                freq.decrement(init.charAt(j-1));
             } else {
                 throw new RuntimeException("Invalid input");
             }

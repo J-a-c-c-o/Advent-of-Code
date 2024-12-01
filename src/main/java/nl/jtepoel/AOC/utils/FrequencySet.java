@@ -4,88 +4,109 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class FrequencySet<A> {
-    private final HashMap<A, Integer> map = new HashMap<>();
+public class FrequencySet<A> extends HashMap<A, Integer> {
 
+    /**
+     * Constructs an empty FrequencySet.
+     */
     public FrequencySet() {
+        super();
     }
 
+    /**
+     * Constructs a FrequencySet from an array.
+     *
+     * @param arr the array to be added to the FrequencySet.
+     */
     public FrequencySet(A[] arr) {
+        super();
         for (A a : arr) {
             add(a);
         }
     }
 
+    /**
+     * Constructs a FrequencySet from a set.
+     *
+     * @param set the set to be added to the FrequencySet.
+     */
     public FrequencySet(Set<A> set) {
-        for (A a : set) {
-            add(a);
-        }
+        super();
+        set.forEach(this::add);
     }
 
+    /**
+     * Constructs a FrequencySet from a list.
+     *
+     * @param list the list to be added to the FrequencySet.
+     */
     public FrequencySet(List<A> list) {
-        for (A a : list) {
-            add(a);
+        super();
+        list.forEach(this::add);
+    }
+
+    /**
+     * Constructs a FrequencySet from an object array.
+     *
+     * @param arr the object array to be added to the FrequencySet.
+     */
+    public FrequencySet(Object arr) {
+        super();
+        for (Object a : (Object[]) arr) {
+            add((A) a);
         }
     }
 
-    public FrequencySet(char[] charArray) {
-        for (char c : charArray) {
-            add((A) Character.valueOf(c));
-        }
-    }
-
-
+    /**
+     * Adds an object to the FrequencySet.
+     *
+     * @param a the object to be added.
+     */
     public void add(A a) {
-        map.put(a, map.getOrDefault(a, 0) + 1);
+        super.put(a, get(a) + 1);
     }
 
-    public int get(A a) {
-        return map.getOrDefault(a, 0);
+    /**
+     * Adds an object to the FrequencySet a specified number of times.
+     * @param freq the frequency of the object to be added.
+     */
+    public void addAll(FrequencySet<A> freq) {
+        freq.forEach((key, value) -> put(key, super.getOrDefault(key, 0) + value));
     }
 
-    public Set<A> getKeys() {
-        return map.keySet();
-    }
-
-    public int size() {
-        return map.size();
-    }
-
-    public void remove(A a) {
-        map.remove(a);
-    }
-
-    public A getLargest() {
-        int max = 0;
-        A maxKey = null;
-        for (A key : map.keySet()) {
-            if (map.get(key) > max) {
-                max = map.get(key);
-                maxKey = key;
-            }
+    /**
+     * Decrements the frequency of an object in the FrequencySet.
+     * @param a the object to be decremented.
+     */
+    public void decrement(A a) {
+        if (get(a) > 0) {
+            super.put(a, get(a) - 1);
         }
-        return maxKey;
     }
 
-    public A getSmallest() {
-        int min = Integer.MAX_VALUE;
-        A minKey = null;
-        for (A key : map.keySet()) {
-            if (map.get(key) < min) {
-                min = map.get(key);
-                minKey = key;
-            }
-        }
-        return minKey;
-    }
-
-
-    public void clear() {
-        map.clear();
-    }
-
+    /**
+     * Returns the frequency of an object in the FrequencySet.
+     * @param a the key whose associated value is to be returned
+     * @return the frequency of the object in the FrequencySet.
+     */
     @Override
-    public String toString() {
-        return map.toString();
+    public Integer get(Object a) {
+        return super.getOrDefault(a, 0);
+    }
+
+    /**
+     * Returns the object with the highest frequency in the FrequencySet.
+     * @return the object with the highest frequency in the FrequencySet.
+     */
+    public A getLargest() {
+        return super.entrySet().stream().max((e1, e2) -> e1.getValue() > e2.getValue() ? 1 : -1).get().getKey();
+    }
+
+    /**
+     * Returns the object with the lowest frequency in the FrequencySet.
+     * @return the object with the lowest frequency in the FrequencySet.
+     */
+    public A getSmallest() {
+        return super.entrySet().stream().min((e1, e2) -> e1.getValue() > e2.getValue() ? 1 : -1).get().getKey();
     }
 }
