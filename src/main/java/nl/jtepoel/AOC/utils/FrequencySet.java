@@ -1,5 +1,6 @@
 package nl.jtepoel.AOC.utils;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -28,21 +29,11 @@ public class FrequencySet<A> extends HashMap<A, Integer> {
     /**
      * Constructs a FrequencySet from a set.
      *
-     * @param set the set to be added to the FrequencySet.
+     * @param items the collection to be added to the FrequencySet.
      */
-    public FrequencySet(Set<A> set) {
+    public FrequencySet(Collection<A> items) {
         super();
-        set.forEach(this::add);
-    }
-
-    /**
-     * Constructs a FrequencySet from a list.
-     *
-     * @param list the list to be added to the FrequencySet.
-     */
-    public FrequencySet(List<A> list) {
-        super();
-        list.forEach(this::add);
+        items.forEach(this::add);
     }
 
     /**
