@@ -210,4 +210,43 @@ public class Utils {
         }
         return days;
     }
+
+
+    public long chineseRemainder(List<Long> n, List<Long> a) {
+        long prod = n.stream().reduce(1L, (i, j) -> i * j);
+        long sum = 0;
+        for (int i = 0; i < n.size(); i++) {
+            long p = prod / n.get(i);
+            sum += a.get(i) * mulInv(p, n.get(i)) * p;
+        }
+
+        return sum % prod;
+    }
+
+    private Long mulInv(long a, long b) {
+        long b0 = b;
+        long x0 = 0;
+        long x1 = 1;
+
+        if (b == 1) {
+            return 1L;
+        }
+
+        while (a > 1) {
+            long q = a / b;
+            long amb = a % b;
+            a = b;
+            b = amb;
+
+            long xqx = x1 - q * x0;
+            x1 = x0;
+            x0 = xqx;
+        }
+
+        if (x1 < 0) {
+            x1 += b0;
+        }
+
+        return x1;
+    }
 }

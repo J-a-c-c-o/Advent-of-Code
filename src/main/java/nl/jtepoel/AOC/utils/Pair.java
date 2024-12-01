@@ -1,5 +1,7 @@
 package nl.jtepoel.AOC.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Pair<A, B> {
@@ -10,6 +12,15 @@ public class Pair<A, B> {
     public Pair(A x, B y) {
         this.x = x;
         this.y = y;
+    }
+
+    public static List<Pair<Long, Long>> zip(List<Long> n, List<Long> a) {
+        List<Pair<Long, Long>> pairs = new ArrayList<>();
+        for (int i = 0; i < n.size(); i++) {
+            pairs.add(new Pair<>(n.get(i), a.get(i)));
+        }
+
+        return pairs;
     }
 
     @Override
