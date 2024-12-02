@@ -41,34 +41,11 @@ public class Main {
         List<List<Integer>> input = getInput();
         int count = 0;
         for (List<Integer> line : input) {
-            boolean i = increasing(line, 3);
-            boolean d = decreasing(line, 3);
-            if (i || d) {
+            if (increasing(line, 3) || decreasing(line, 3)) {
                 count++;
             }
         }
         return String.valueOf(count);
-    }
-    private boolean increasing(List<Integer> line, int i) {
-        for (int j = 0; j < line.size() - 1; j++) {
-            int difference = line.get(j + 1) - line.get(j);
-
-            if (difference > i || difference <= 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean decreasing(List<Integer> line, int i) {
-        for (int j = 0; j < line.size() - 1; j++) {
-
-            int difference = line.get(j) - line.get(j + 1);
-            if (difference > i || difference <= 0) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public String part2() {
@@ -99,7 +76,25 @@ public class Main {
 
     }
 
+    private boolean increasing(List<Integer> line, int i) {
+        for (int j = 0; j < line.size() - 1; j++) {
+            int difference = line.get(j + 1) - line.get(j);
 
+            if (difference > i || difference <= 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    private boolean decreasing(List<Integer> line, int i) {
+        for (int j = 0; j < line.size() - 1; j++) {
 
+            int difference = line.get(j) - line.get(j + 1);
+            if (difference > i || difference <= 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
