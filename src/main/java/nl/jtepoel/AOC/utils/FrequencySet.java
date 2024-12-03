@@ -34,6 +34,42 @@ public class FrequencySet<A> extends HashMap<A, Integer> {
         items.forEach(this::add);
     }
 
+    /**
+     * Constructs a FrequencySet from a char array.
+     *
+     * @param charArray the char array to be added to the FrequencySet.
+     */
+    public FrequencySet(char[] charArray) {
+        super();
+        for (char c : charArray) {
+            add((A) Character.valueOf(c));
+        }
+    }
+
+
+    /**
+     * Constructs a FrequencySet from a string.
+     *
+     * @param s the string to be added to the FrequencySet.
+     */
+    public FrequencySet(String s) {
+        super();
+        for (char c : s.toCharArray()) {
+            add((A) Character.valueOf(c));
+        }
+    }
+
+    /**
+     * Constructs a FrequencySet from an int array.
+     *
+     * @param intArray the int array to be added to the FrequencySet.
+     */
+    public FrequencySet(int[] intArray) {
+        super();
+        for (int i : intArray) {
+            add((A) Integer.valueOf(i));
+        }
+    }
 
     /**
      * Adds an object to the FrequencySet.

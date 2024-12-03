@@ -56,7 +56,7 @@ public class Main {
 
 
     public String part2() {
-        Pattern pattern = Pattern.compile("do\\(\\)|don't\\(\\)|mul\\((\\d+),(\\d+)\\)");
+        Pattern pattern = Pattern.compile("mul\\(([0-9]{1,3}),([0-9]{1,3})\\)|do\\(\\)|don't\\(\\)");
         List<String> input = getInput();
         String combined = String.join("", input);
 

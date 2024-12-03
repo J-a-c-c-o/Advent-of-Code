@@ -35,14 +35,38 @@ public class FrequencySetLong<A> extends HashMap<A, Long> {
     }
 
     /**
-     * Constructs a FrequencySet from an object array.
+     * Constructs a FrequencySet from a char array.
      *
-     * @param arr the object array to be added to the FrequencySet.
+     * @param charArray the char array to be added to the FrequencySet.
      */
-    public FrequencySetLong(Object arr) {
+    public FrequencySetLong(char[] charArray) {
         super();
-        for (Object a : (Object[]) arr) {
-            add((A) a);
+        for (char c : charArray) {
+            add((A) Character.valueOf(c));
+        }
+    }
+
+    /**
+     * Constructs a FrequencySet from a string.
+     *
+     * @param s the string to be added to the FrequencySet.
+     */
+    public FrequencySetLong(String s) {
+        super();
+        for (char c : s.toCharArray()) {
+            add((A) Character.valueOf(c));
+        }
+    }
+
+    /**
+     * Constructs a FrequencySet from an int array.
+     *
+     * @param arr the int array to be added to the FrequencySet.
+     */
+    public FrequencySetLong(int[] arr) {
+        super();
+        for (int a : arr) {
+            add((A) Integer.valueOf(a));
         }
     }
 
