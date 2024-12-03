@@ -34,17 +34,6 @@ public class FrequencySet<A> extends HashMap<A, Integer> {
         items.forEach(this::add);
     }
 
-    /**
-     * Constructs a FrequencySet from an object array.
-     *
-     * @param arr the object array to be added to the FrequencySet.
-     */
-    public FrequencySet(Object arr) {
-        super();
-        for (Object a : (Object[]) arr) {
-            add((A) a);
-        }
-    }
 
     /**
      * Adds an object to the FrequencySet.
