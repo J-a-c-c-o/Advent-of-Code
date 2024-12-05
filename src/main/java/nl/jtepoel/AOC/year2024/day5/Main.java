@@ -77,14 +77,14 @@ public class Main {
 
 
     public String part2() {
-        for (List<Integer> page : incorrect) {
-            for (int i = 0; i < page.size(); i++) {
-                for (int j = i + 1; j < page.size(); j++) {
-                    if (!after.containsKey(page.get(i)) || !after.get(page.get(i)).contains(page.get(j))) {
-                        Collections.swap(page, i, j);
+        for (List<Integer> pageOrder : incorrect) {
+            for (int i = 0; i < pageOrder.size(); i++) {
+                pageOrder.sort((a, b) -> {
+                    if (!after.containsKey(a) || !after.get(a).contains(b)) {
+                        return -1;
                     }
-
-                }
+                    return 1;
+                });
             }
         }
 
