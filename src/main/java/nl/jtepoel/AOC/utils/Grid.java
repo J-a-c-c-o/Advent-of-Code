@@ -49,6 +49,17 @@ public class Grid<A> {
         return grid.size();
     }
 
+    public Pair<Integer, Integer> getDimensions() {
+        int maxX = Integer.MIN_VALUE;
+        int maxY = Integer.MIN_VALUE;
+        for (Point point : grid.keySet()) {
+            maxX = Math.max(maxX, point.x);
+            maxY = Math.max(maxY, point.y);
+        }
+
+        return new Pair<>(maxX, maxY);
+    }
+
     public void clear() {
         grid.clear();
     }
