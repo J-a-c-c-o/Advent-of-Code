@@ -49,9 +49,7 @@ public class Main {
 
         }
 
-        Pair< List<Pair<Integer,Integer>>,List<List<Integer>>> pair = new Pair<>(rules, pageNumbers);
-
-        return pair;
+        return new Pair<>(rules, pageNumbers);
     }
 
     private final List<List<Integer>> correct = new ArrayList<>();
@@ -78,14 +76,12 @@ public class Main {
 
     public String part2() {
         for (List<Integer> pageOrder : incorrect) {
-            for (int i = 0; i < pageOrder.size(); i++) {
-                pageOrder.sort((a, b) -> {
-                    if (!after.containsKey(a) || !after.get(a).contains(b)) {
-                        return -1;
-                    }
-                    return 1;
-                });
-            }
+            pageOrder.sort((a, b) -> {
+                if (!after.containsKey(a) || !after.get(a).contains(b)) {
+                    return -1;
+                }
+                return 1;
+            });
         }
 
         int middle = incorrect.stream().mapToInt(p -> p.get(p.size()/2)).sum();
