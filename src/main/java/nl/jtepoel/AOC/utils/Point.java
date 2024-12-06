@@ -81,7 +81,7 @@ public class Point {
         }
     }
 
-    public Point next(char direction, boolean right) {
+    public Point forward(char direction, boolean right) {
         switch (direction) {
             case '^' -> {
                 return right ? new Point(x, y - 1) : new Point(x, y + 1);

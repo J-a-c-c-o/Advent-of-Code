@@ -45,18 +45,23 @@ public class Main {
         return new Triple<>(grid, pos, direction);
     }
 
+    Set<Point> visited = new HashSet<>();
+    Grid<Boolean> grid = null;
+    Point start = null;
+    char startDirection = '^';
     public String part1() {
         Triple<Grid<Boolean>, Point, Character> pair = getInput();
-        Grid<Boolean> grid = pair.getFirst();
-        Grid<Boolean> visited = new Grid<>();
-        Point pos = pair.getSecond();
-        char direction = pair.getThird();
+        grid = pair.getFirst();
+        start = pair.getSecond();
+        startDirection = pair.getThird();
 
+        Point pos = start;
+        char direction = startDirection;
 
         Pair<Integer, Integer> dimensions = grid.getDimensions();
         while (pos.getX() >= 0 && pos.getX() <= dimensions.getFirst() && pos.getY() >= 0 && pos.getY() <= dimensions.getSecond()) {
-            visited.set(new Point(pos.getX(), pos.getY()), true);
-            while (grid.getOrDefault(pos.next(direction, true), false)) {
+            visited.add(new Point(pos.getX(), pos.getY()));
+            while (grid.getOrDefault(pos.forward(direction, true), false)) {
                 direction = pos.turn(direction);
             }
             pos = pos.move(direction);
@@ -67,28 +72,17 @@ public class Main {
     }
 
     public String part2() {
-        Triple<Grid<Boolean>, Point, Character> pair = getInput();
-
-        Grid<Boolean> grid = pair.getFirst();
-        Pair<Integer, Integer> dimensions = grid.getDimensions();
-
-        char direction = pair.getThird();
-        Point currentPos = new Point(pair.getSecond().getX(), pair.getSecond().getY());
+        Point pos = start;
+        char direction = startDirection;
 
         int loops = 0;
-        for (int i = 0; i <= dimensions.x; i++) {
-            for (int j = 0; j <= dimensions.y; j++) {
-                if (grid.getOrDefault(new Point(i, j), false) || currentPos.equals(new Point(i, j))) {
-                    continue;
-                }
-
-                grid.set(new Point(i, j), true);
-
-                loops += loop(currentPos, direction, dimensions, grid) ? 1 : 0;
-
-                grid.remove(new Point(i, j));
-            }
+        Pair<Integer, Integer> dimensions = grid.getDimensions();
+        for (Point point : visited) {
+            grid.set(point, true);
+            loops += loop(pos, direction, dimensions, grid) ? 1 : 0;
+            grid.remove(point);
         }
+
         return String.valueOf(loops);
     }
 
@@ -99,7 +93,7 @@ public class Main {
                 return true;
             }
             loop.add(new Pair<>(pos, direction));
-            while (grid.getOrDefault(pos.next(direction, true), false)) {
+            while (grid.getOrDefault(pos.forward(direction, true), false)) {
                 direction = pos.turn(direction);
             }
             pos = pos.move(direction);
