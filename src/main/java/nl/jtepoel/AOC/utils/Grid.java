@@ -149,6 +149,13 @@ public class Grid<A> {
         return i1;
     }
 
+    public A getOrDefault(Point point, A i1) {
+        if (contains(point)) {
+            return get(point);
+        }
+        return i1;
+    }
+
     public Grid<A> copy() {
         Grid<A> copy = new Grid<>();
         for (Point point : grid.keySet()) {
