@@ -1,24 +1,27 @@
 package nl.jtepoel.AOC.utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Grid<A> {
     private final Map<Point, A> grid;
+    private final Map<A, List<Point>> frequency;
     int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
     public Grid() {
         grid = new HashMap<>();
+        frequency = new HashMap<>();
     }
 
     public void set(Point point, A value) {
         grid.put(point, value);
+        frequency.putIfAbsent(value, new ArrayList<>());
+        frequency.get(value).add(point);
     }
 
     public void set(int x, int y, A value) {
         grid.put(new Point(x, y), value);
+        frequency.putIfAbsent(value, new ArrayList<>());
+        frequency.get(value).add(new Point(x, y));
     }
 
     public A get(Point point) {
@@ -38,10 +41,12 @@ public class Grid<A> {
     }
 
     public void remove(Point point) {
+        frequency.get(grid.get(point)).remove(point);
         grid.remove(point);
     }
 
     public void remove(int x, int y) {
+        frequency.get(grid.get(new Point(x, y))).remove(new Point(x, y));
         grid.remove(new Point(x, y));
     }
 
@@ -50,14 +55,7 @@ public class Grid<A> {
     }
 
     public Pair<Integer, Integer> getDimensions() {
-        int maxX = Integer.MIN_VALUE;
-        int maxY = Integer.MIN_VALUE;
-        for (Point point : grid.keySet()) {
-            maxX = Math.max(maxX, point.x);
-            maxY = Math.max(maxY, point.y);
-        }
-
-        return new Pair<>(maxX, maxY);
+        return new Pair<>(getMaxX(), getMaxY());
     }
 
     public void clear() {
@@ -164,4 +162,16 @@ public class Grid<A> {
         return copy;
 
     }
+
+    public boolean inRange(Point p2) {
+        return p2.getX() >= 0 && p2.getX() <= getMaxX() && p2.getY() >= 0 && p2.getY() <= getMaxY();
+    }
+
+
+    public Map<A, List<Point>> getFrequency() {
+        return new HashMap<>() {{
+            putAll(frequency);
+        }};
+    }
+
 }

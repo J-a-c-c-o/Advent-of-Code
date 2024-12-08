@@ -1,6 +1,7 @@
 package nl.jtepoel.AOC.utils;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Point {
 
@@ -21,8 +22,7 @@ public class Point {
 
     @Override
     public int hashCode() {
-        int[] arr = {x, y};
-        return Arrays.hashCode(arr);
+        return Objects.hash(x, y);
     }
 
     @Override
