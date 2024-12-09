@@ -3,6 +3,7 @@ package nl.jtepoel.AOC.year2024.day9;
 
 import java.util.*;
 
+import nl.jtepoel.AOC.utils.Pair;
 import nl.jtepoel.AOC.utils.Utils;
 
 public class Main {
@@ -44,6 +45,29 @@ public class Main {
         return chars;
     }
 
+    public List<Pair<Long, Long>> getInput2() {
+        String line =  utils.getLines(Utils.LOCSRC + "/year2024/day9/input.txt").getFirst();
+        List<Pair<Long, Long>> chars = new ArrayList<>();
+        long ID = 0;
+
+        for (int i = 0; i < line.length(); i++) {
+            Long c;
+            if (i%2 == 0) {
+                c = ID;
+                ID++;
+            } else {
+                c = null;
+            }
+
+            if (Long.parseLong(String.valueOf(line.charAt(i))) >= 1) {
+                chars.add(new Pair<>(Long.parseLong(String.valueOf(line.charAt(i))), c));
+            }
+
+        }
+
+        return chars;
+    }
+
     public String part1() {
         List<Long> chars = getInput();
         List<Long> newChars = new ArrayList<>(chars);
@@ -56,7 +80,7 @@ public class Main {
             newChars.set(i, null);
 
             //replace first null with c
-            for (int j = 0; j < newChars.size(); j++) {
+            for (int j = 0; j < i+1; j++) {
                 if (newChars.get(j) == null) {
                     newChars.set(j, c);
                     break;
@@ -82,63 +106,64 @@ public class Main {
     }
 
     public String part2() {
-        List<Long> chars = getInput();
-        List<Long> newChars = new ArrayList<>(chars);
+        List<Pair<Long, Long>> chars = getInput2();
 
-        List<Long> cycle = new ArrayList<>(new HashSet<>(chars));
-        cycle.removeIf(Objects::isNull);
-        cycle.sort(Comparator.reverseOrder());
-
-
-        int edited = 0;
-        while (edited<=cycle.getLast()) {
-            Long c = cycle.removeFirst();
-            List<Integer> findAll = new ArrayList<>();
-            for (int i = 0; i < newChars.size(); i++) {
-                if (Objects.equals(newChars.get(i), c)) {
-                    findAll.add(i);
-                }
+        Queue<Pair<Long, Long>> queue = new LinkedList<>();
+        //add all indices that are not null
+        for (int i = chars.size() - 1; i >= 0; i--) {
+            if (chars.get(i).getRight() != null) {
+                queue.add(chars.get(i));
             }
+        }
 
-
-
-            // find place where all fits
+        int counter = 0;
+        while (counter < queue.size()) {
+            Pair<Long, Long> c = queue.poll();
+            int index = chars.indexOf(c);
+            //find place where c fits
             boolean found = false;
-            for (int i = 0; i < newChars.size(); i++) {
-                if (newChars.get(i) == null && i + findAll.size() < newChars.size() && i < findAll.getFirst()) {
-                    boolean fits = true;
-                    for (int j = 0; j < findAll.size(); j++) {
-                        if (newChars.get(i + j) != null) {
-                            fits = false;
-                            break;
-                        }
-                    }
+            for (int i = 0; i < index; i++) {
+                Pair<Long, Long> l = chars.get(i);
+                if (l.getRight() == null && l.getLeft() >= c.getLeft()) {
+                    chars.set(index, new Pair<>(c.getLeft(), null));
+                    chars.set(i, c);
 
-                    if (fits) {
-                        for (int j = 0; j < findAll.size(); j++) {
-                            newChars.set(i + j, c);
-                            newChars.set(findAll.get(j), null);
-                        }
-                        found = true;
-                        break;
+                    if (l.getLeft() > c.getLeft()) {
+                        chars.add(i+1, new Pair<>(l.getLeft() - c.getLeft(), null));
                     }
+                    found = true;
+                    break;
                 }
             }
 
             if (!found) {
-                edited++;
-                cycle.add(c);
+                queue.add(c);
+                counter++;
             } else {
-                edited = 0;
+                counter = 0;
             }
-
 
         }
 
-        long sum = checkSum(newChars);
+        long sum = checkSum2(chars);
+
+
         return String.valueOf(sum);
     }
 
-
-
+    private static long checkSum2(List<Pair<Long, Long>> chars) {
+        long sum = 0;
+        int index = 0;
+        for (Pair<Long, Long> c : chars) {
+            if (c.getRight() != null) {
+                for (int j = 0; j < c.getLeft(); j++) {
+                    sum += c.getRight() * index;
+                    index++;
+                }
+            } else {
+                index += c.getLeft();
+            }
+        }
+        return sum;
+    }
 }
