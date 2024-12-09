@@ -1,7 +1,7 @@
 # Advent of Code 🎄
 
 ![Language](https://img.shields.io/badge/Language-Java-orange?style=flat-square)
-![Days Completed](https://img.shields.io/badge/Days%20Completed-59-blue?style=flat-square)
+![Days Completed](https://img.shields.io/badge/Days%20Completed-60-blue?style=flat-square)
 
 Welcome to my solutions for the [Advent of Code](https://adventofcode.com/) challenges! This repository contains my Java solutions for the puzzles, along with utility classes to streamline the process of solving the challenges.
 
@@ -91,9 +91,10 @@ Advent of Code is an annual programming event in December, where participants so
 | 2024 | 3   | Mull It Over                       | ⭐⭐         |
 | 2024 | 4   | Ceres Search                       | ⭐⭐         |
 | 2024 | 5   | Print Queue                        | ⭐          |
-| 2024 | 6   | Guard Gallivant                    | ⭐⭐          |
-| 2024 | 7   | Bridge Repair                      | ⭐⭐⭐          |
-| 2024 | 8   | Resonant Collinearity              | ⭐⭐          |
+| 2024 | 6   | Guard Gallivant                    | ⭐⭐         |
+| 2024 | 7   | Bridge Repair                      | ⭐⭐⭐        |
+| 2024 | 8   | Resonant Collinearity              | ⭐⭐         |
+| 2024 | 9   | Disk Fragmenter                    | ⭐⭐⭐        |
 
 ---
 
