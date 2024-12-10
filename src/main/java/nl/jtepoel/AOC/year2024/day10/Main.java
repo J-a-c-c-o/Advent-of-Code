@@ -37,6 +37,8 @@ public class Main {
         return grid;
     }
 
+    private final int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
     public String part1() {
         Grid<Integer> grid = getInput();
         Pair<Integer, Integer> dim = grid.getDimensions();
@@ -45,7 +47,6 @@ public class Main {
 
         //find all 0's
         long count = 0;
-        int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         for (int i = 0; i <= dim.x; i++) {
             for (int j = 0; j <= dim.y; j++) {
                 if (grid.get(i, j).equals(0)) {
@@ -86,15 +87,12 @@ public class Main {
         Grid<Integer> grid = getInput();
         Pair<Integer, Integer> dim = grid.getDimensions();
 
-        Queue<Point> queue = new LinkedList<>();
-
         //find all 0's
         long count = 0;
-        int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
         for (int i = 0; i <= dim.x; i++) {
             for (int j = 0; j <= dim.y; j++) {
                 if (grid.get(i, j).equals(0)) {
-                    count += walk(grid, new Point(i, j), directions, dim);
+                    count += walk(grid, new Point(i, j), dim);
                 }
             }
         }
@@ -103,10 +101,8 @@ public class Main {
         return String.valueOf(count);
 
     }
-
-    int[] directions = new int[]{0, 1, 0, -1, 0};
     HashMap<Point, Long> visited = new HashMap<>();
-    public long walk(Grid<Integer> grid, Point pos, int[][] directions, Pair<Integer, Integer> dim) {
+    public long walk(Grid<Integer> grid, Point pos, Pair<Integer, Integer> dim) {
         long count = 0;
 
         if (visited.containsKey(pos)) {
@@ -120,7 +116,7 @@ public class Main {
         for (int[] direction : directions) {
             Point newPos = new Point(pos.x + direction[0], pos.y + direction[1]);
             if (grid.contains(newPos) && grid.get(newPos) - grid.get(pos) == 1) {
-                long inter = walk(grid, newPos, directions, dim);
+                long inter = walk(grid, newPos, dim);
                 visited.put(newPos, inter);
                 count += inter;
 
