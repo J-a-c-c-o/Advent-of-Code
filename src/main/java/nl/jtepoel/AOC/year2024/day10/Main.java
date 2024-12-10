@@ -51,16 +51,14 @@ public class Main {
             for (int j = 0; j <= dim.y; j++) {
                 if (grid.get(i, j).equals(0)) {
                     queue.add(new Point(i, j));
-
-                    HashSet<Point> reached = new HashSet<>();
+                    Set<Point> visited = new HashSet<>();
                     while (!queue.isEmpty()) {
                         Point current = queue.poll();
-
-                        if (reached.contains(current)) {
+                        if (visited.contains(current)) {
                             continue;
                         }
 
-                        reached.add(current);
+                        visited.add(current);
 
                         if (grid.get(current) == 9) {
                             count++;
@@ -68,12 +66,10 @@ public class Main {
 
                         for (int[] direction : directions) {
                             Point newPos = new Point(current.x + direction[0], current.y + direction[1]);
-
                             if (grid.contains(newPos) && grid.get(newPos) - grid.get(current) == 1) {
                                 queue.add(newPos);
                             }
                         }
-
                     }
                 }
             }
@@ -92,7 +88,7 @@ public class Main {
         for (int i = 0; i <= dim.x; i++) {
             for (int j = 0; j <= dim.y; j++) {
                 if (grid.get(i, j).equals(0)) {
-                    count += walk(grid, new Point(i, j), dim);
+                    count += walk(grid, new Point(i, j));
                 }
             }
         }
@@ -102,7 +98,7 @@ public class Main {
 
     }
     HashMap<Point, Long> visited = new HashMap<>();
-    public long walk(Grid<Integer> grid, Point pos, Pair<Integer, Integer> dim) {
+    public long walk(Grid<Integer> grid, Point pos) {
         long count = 0;
 
         if (visited.containsKey(pos)) {
@@ -116,7 +112,7 @@ public class Main {
         for (int[] direction : directions) {
             Point newPos = new Point(pos.x + direction[0], pos.y + direction[1]);
             if (grid.contains(newPos) && grid.get(newPos) - grid.get(pos) == 1) {
-                long inter = walk(grid, newPos, dim);
+                long inter = walk(grid, newPos);
                 visited.put(newPos, inter);
                 count += inter;
 
@@ -126,7 +122,6 @@ public class Main {
         return count;
 
     }
-
 
 
 
