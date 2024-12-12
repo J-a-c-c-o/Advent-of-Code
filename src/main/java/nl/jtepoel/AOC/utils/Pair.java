@@ -23,6 +23,10 @@ public class Pair<A, B> {
         return pairs;
     }
 
+    public static <A, B> Pair<A, B> of(A x, B y) {
+        return new Pair<>(x, y);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

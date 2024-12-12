@@ -1,6 +1,5 @@
 package nl.jtepoel.AOC.utils;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Point {
@@ -100,5 +99,27 @@ public class Point {
             }
         }
 
+    }
+
+    public Point[] getNeighbours() {
+        return new Point[]{
+                new Point(x, y - 1),
+                new Point(x + 1, y),
+                new Point(x, y + 1),
+                new Point(x - 1, y)
+        };
+    }
+
+    public Point[] getDiagonals() {
+        return new Point[]{
+                new Point(x - 1, y - 1),
+                new Point(x + 1, y - 1),
+                new Point(x + 1, y + 1),
+                new Point(x - 1, y + 1)
+        };
+    }
+
+    public Point add(int i, int i1) {
+        return new Point(x + i, y + i1);
     }
 }
