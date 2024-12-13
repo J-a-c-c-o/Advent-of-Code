@@ -67,7 +67,7 @@ public class Main {
                 Point p2 = t.getSecond();
                 Point to = t.getThird();
 
-                Solver solver = context.mkSolver();
+                Optimize optimizer = context.mkOptimize();
 
                 IntExpr p1x = context.mkInt(p1.x);
                 IntExpr p1y = context.mkInt(p1.y);
@@ -79,17 +79,20 @@ public class Main {
                 IntExpr x = context.mkIntConst("x");
                 IntExpr y = context.mkIntConst("y");
 
-                solver.add(context.mkEq(context.mkAdd(context.mkMul(p1x, x), context.mkMul(p2x, y)), tox));
-                solver.add(context.mkEq(context.mkAdd(context.mkMul(p1y, x), context.mkMul(p2y, y)), toy));
+                optimizer.Add(context.mkEq(context.mkAdd(context.mkMul(p1x, x), context.mkMul(p2x, y)), tox));
+                optimizer.Add(context.mkEq(context.mkAdd(context.mkMul(p1y, x), context.mkMul(p2y, y)), toy));
 
-                solver.add(context.mkGe(x, context.mkInt(0)));
-                solver.add(context.mkGe(y, context.mkInt(0)));
+                optimizer.Add(context.mkGe(x, context.mkInt(0)));
+                optimizer.Add(context.mkGe(y, context.mkInt(0)));
 
-                if (solver.check() != Status.SATISFIABLE) {
+                optimizer.MkMinimize(context.mkAdd(context.mkMul(x, context.mkInt(3)), y));
+
+
+                if (optimizer.Check() != Status.SATISFIABLE) {
                     continue;
                 }
 
-                Model model = solver.getModel();
+                Model model = optimizer.getModel();
 
                 Expr<IntSort> pxr1 = model.eval(x, false);
                 Expr<IntSort> pyr1 = model.eval(y, false);
