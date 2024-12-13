@@ -2,17 +2,19 @@ package nl.jtepoel.AOC.year2024.day13;
 
 
 import java.util.ArrayList;
-import java.util.InvalidPropertiesFormatException;
+import java.util.HashMap;
 import java.util.List;
 
-import com.microsoft.z3.*;
+import com.microsoft.z3.Expr;
 import nl.jtepoel.AOC.utils.Point;
 import nl.jtepoel.AOC.utils.Triple;
 import nl.jtepoel.AOC.utils.Utils;
+import nl.jtepoel.AOC.utils.evaluator.Evaluator;
 
 public class Main {
 
     Utils utils = new Utils();
+    Evaluator evaluator = new Evaluator();
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
@@ -37,6 +39,7 @@ public class Main {
             Point p2 = new Point(Integer.parseInt(split2[0].substring(2)), Integer.parseInt(split2[1].substring(2)));
             Point p3 = new Point(Integer.parseInt(split3[0].substring(2)), Integer.parseInt(split3[1].substring(2)));
 
+
             out.add(new Triple<>(p1,p2,p3));
         }
 
@@ -59,47 +62,25 @@ public class Main {
         return String.valueOf(res);
     }
 
-    private static long calculate(List<Triple<Point, Point, Point>> input, long reward) {
+    private long calculate(List<Triple<Point, Point, Point>> input, long reward) {
         long res = 0;
-        try(Context context = new Context()) {
             for (Triple<Point,Point,Point> t : input) {
-                Point p1 = t.getFirst();
-                Point p2 = t.getSecond();
-                Point to = t.getThird();
+                try {
+                    Point p1 = t.getFirst();
+                    Point p2 = t.getSecond();
+                    Point to = t.getThird();
 
-                Optimize optimizer = context.mkOptimize();
+                    String minimize = "x:INT * 3 + y:INT";
+                    String inputStr = STR."\{p1.x} * x:INT + \{p2.x} * y:INT == \{to.x + reward} && \{p1.y} * x:INT + \{p2.y} * y:INT == \{to.y + reward}";
 
-                IntExpr p1x = context.mkInt(p1.x);
-                IntExpr p1y = context.mkInt(p1.y);
-                IntExpr p2x = context.mkInt(p2.x);
-                IntExpr p2y = context.mkInt(p2.y);
-                IntExpr tox = context.mkInt(to.x + reward);
-                IntExpr toy = context.mkInt(to.y + reward);
+                    HashMap<String, Expr> evaluate = evaluator.evaluate(inputStr, minimize, null);
 
-                IntExpr x = context.mkIntConst("x");
-                IntExpr y = context.mkIntConst("y");
+                    res += Long.parseLong(evaluate.get("x").toString()) * 3 + Long.parseLong(evaluate.get("y").toString());
 
-                optimizer.Add(context.mkEq(context.mkAdd(context.mkMul(p1x, x), context.mkMul(p2x, y)), tox));
-                optimizer.Add(context.mkEq(context.mkAdd(context.mkMul(p1y, x), context.mkMul(p2y, y)), toy));
+                } catch (Exception _) {
 
-                optimizer.Add(context.mkGe(x, context.mkInt(0)));
-                optimizer.Add(context.mkGe(y, context.mkInt(0)));
-
-                optimizer.MkMinimize(context.mkAdd(context.mkMul(x, context.mkInt(3)), y));
-
-
-                if (optimizer.Check() != Status.SATISFIABLE) {
-                    continue;
                 }
-
-                Model model = optimizer.getModel();
-
-                Expr<IntSort> pxr1 = model.eval(x, false);
-                Expr<IntSort> pyr1 = model.eval(y, false);
-
-                res += Long.parseLong(pxr1.toString()) * 3 + Long.parseLong(pyr1.toString());
             }
-        }
         return res;
     }
 
