@@ -174,4 +174,41 @@ public class Grid<A> {
         }};
     }
 
+    public List<List<Point>> connectedComponents() {
+        // connected if they are neighbours
+        Set<Point> visited = new HashSet<>();
+        List<List<Point>> components = new ArrayList<>();
+        for (Point point : grid.keySet()) {
+
+            if (visited.contains(point)) {
+                continue;
+            }
+
+            Queue<Point> queue = new LinkedList<>();
+            queue.add(point);
+            List<Point> component = new ArrayList<>();
+            while (!queue.isEmpty()) {
+                Point current = queue.poll();
+                if (visited.contains(current)) {
+                    continue;
+                }
+
+                A value = get(current);
+
+                visited.add(current);
+
+                component.add(current);
+                for (Point neighbour : getNeighbours(current)) {
+                    if (get(neighbour).equals(value)) {
+                        queue.add(neighbour);
+                    }
+                }
+            }
+            components.add(component);
+        }
+
+        return components;
+    }
+
+
 }

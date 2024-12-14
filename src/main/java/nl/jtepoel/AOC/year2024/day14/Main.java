@@ -75,9 +75,8 @@ public class Main {
     }
 
 
-    int mostAdjacency = -1;
+    int minConnected = Integer.MAX_VALUE;
     int seconds = -1;
-    Grid<Integer> grid = new Grid<>();
     public String part2() {
         List<Robot> robots = getInput();
         int boundsX = 101, boundsY = 103, i = 0;
@@ -87,32 +86,22 @@ public class Main {
                 robot.move(boundsX, boundsY);
             }
             if (checkTree(robots, i)) {
-                grid.print(0);
                 return String.valueOf(seconds);
             }
         }
     }
 
     private boolean checkTree(List<Robot> robots, int seconds) {
-        int adjecency = 0;
+        Grid<Character> grid = new Grid<>();
         for (Robot robot : robots) {
-            for (Robot other : robots) {
-                if (robot != other) {
-                    if (Math.abs(robot.getX() - other.getX()) <= 1 && Math.abs(robot.getY() - other.getY()) <= 1) {
-                        adjecency++;
-                        break;
-                    }
-                }
-            }
+            grid.set(robot.getY(), robot.getX(), '#');
         }
 
-        if (adjecency > mostAdjacency) {
-            mostAdjacency = adjecency;
+        int connected = grid.connectedComponents().size();
+
+        if (connected < minConnected) {
+            minConnected = connected;
             this.seconds = seconds;
-            this.grid = new Grid<>();
-            for (Robot robot : robots) {
-                grid.set(robot.getY(), robot.getX(), grid.get(robot.getY(), robot.getX()) == null ? 1 : grid.get(robot.getY(), robot.getX()) + 1);
-            }
         }
 
         return seconds - this.seconds > 10000;
