@@ -210,5 +210,14 @@ public class Grid<A> {
         return components;
     }
 
+    public Point find(A value) {
+        for (Point point : grid.keySet()) {
+            if (get(point).equals(value)) {
+                return point;
+            }
+        }
+        return null;
+    }
+
 
 }

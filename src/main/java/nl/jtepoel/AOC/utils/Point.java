@@ -122,4 +122,8 @@ public class Point {
     public Point add(int i, int i1) {
         return new Point(x + i, y + i1);
     }
+
+    public int manhattan(Point end) {
+        return Math.abs(x - end.x) + Math.abs(y - end.y);
+    }
 }
