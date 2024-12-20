@@ -49,12 +49,7 @@ public class Main {
     public String part1() {
         Grid<Integer> input = getInput();
 
-        LinkedList<Point> path = calculatePath(input);
-
-        for (int i = 0; i < path.size(); i++) {
-            Point p = path.get(i);
-            input.set(p, i);
-        }
+        LinkedList<Point> path = walk(input);
 
         int count = getShortCuts(path, input, 2);
 
@@ -67,15 +62,9 @@ public class Main {
     public String part2() {
         Grid<Integer> input = getInput();
 
-        LinkedList<Point> path = calculatePath(input);
-
-        for (int i = 0; i < path.size(); i++) {
-            Point p = path.get(i);
-            input.set(p, i);
-        }
+        LinkedList<Point> path = walk(input);
 
         int count = getShortCuts(path, input, 20);
-
 
         return String.valueOf(count);
 
@@ -84,18 +73,12 @@ public class Main {
 
     private static int getShortCuts(LinkedList<Point> path, Grid<Integer> input, int allowed) {
         int count = 0;
-        for (Point p : path) {
+        while (!path.isEmpty()) {
+            Point p = path.poll();
             int s = input.get(p);
             for (Point p2 : path) {
                 int s2 = input.get(p2);
 
-                if (s2 < s) {
-                    continue;
-                }
-
-                if (p.equals(p2)) {
-                    continue;
-                }
                 int distance = Math.abs(p.getX() - p2.getX()) + Math.abs(p.getY() - p2.getY());
 
                 if (distance == 1) {
@@ -115,38 +98,37 @@ public class Main {
         return count;
     }
 
-    private LinkedList<Point> calculatePath(Grid<Integer> input) {
+    private LinkedList<Point> walk(Grid<Integer> input) {
+        LinkedList<Point> path = new LinkedList<>();
+
         Point start = input.find(-2);
         Point end = input.find(-3);
-        Queue<Pair<Point, LinkedList<Point>>> queue = new PriorityQueue<>(Comparator.comparingInt(t -> t.getSecond().size()));
 
-        queue.add(new Pair<>(start, new LinkedList<>()));
 
-        while (!queue.isEmpty()) {
-            Pair<Point, LinkedList<Point>> current = queue.poll();
-            Point currentPoint = current.getFirst();
-            LinkedList<Point> currentPath = current.getSecond();
+        input.set(start, 0);
 
-            if (currentPath.contains(currentPoint)) {
-                continue;
-            }
-            currentPath.add(currentPoint);
+        List<Point> visited = new LinkedList<>();
 
-            if (currentPoint.equals(end)) {
-                return currentPath;
-            }
+        Point current = start;
+        path.add(current);
+        visited.add(current);
+        while (!current.equals(end)) {
 
+            //find the next point
             for (int[] direction : directions) {
-                Point neighbour = currentPoint.add(direction[0], direction[1]);
-
-                if (input.get(neighbour) == null || (input.get(neighbour) == -4)) {
-                    continue;
+                Point p = new Point(current.getX() + direction[0], current.getY() + direction[1]);
+                if (input.contains(p) && input.get(p) != -4 && !visited.contains(p)) {
+                    visited.add(p);
+                    input.set(p, path.size());
+                    current = p;
+                    break;
                 }
-                queue.add(new Pair<>(neighbour, new LinkedList<>(currentPath)));
-
             }
+
+            path.add(current);
         }
-        return null;
+
+        return path;
     }
 
 
