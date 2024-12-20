@@ -71,7 +71,7 @@ public class Main {
                     Point to = t.getThird();
 
                     String minimize = "x:INT * 3 + y:INT";
-                    String inputStr = STR."\{p1.x} * x:INT + \{p2.x} * y:INT == \{to.x + reward} && \{p1.y} * x:INT + \{p2.y} * y:INT == \{to.y + reward}";
+                    String inputStr = p1.x + " * x:INT + " + p2.x + " * y:INT == " + (to.x + reward) + " && " + p1.y + " * x:INT + " + p2.y + " * y:INT == " + (to.y + reward);
 
                     HashMap<String, Expr> evaluate = evaluator.evaluate(inputStr, minimize, null);
 

@@ -34,6 +34,8 @@ public class Main {
                     grid.set(new Point(i, j), -2);
                 } else if (line.charAt(j) == 'E') {
                     grid.set(new Point(i, j), -3);
+                } else {
+                    grid.set(new Point(i, j), -4);
                 }
 
             }
@@ -47,29 +49,14 @@ public class Main {
     public String part1() {
         Grid<Integer> input = getInput();
 
-        LinkedList<Point> path = calculateSaves(input);
+        LinkedList<Point> path = calculatePath(input);
 
         for (int i = 0; i < path.size(); i++) {
             Point p = path.get(i);
             input.set(p, i);
         }
 
-        int count = 0;
-
-        for (Point p : path) {
-            for (Point p2 : path) {
-                if (p.equals(p2)) {
-                    continue;
-                }
-                if (p.manhattan(p2) <= 20) {
-                    if (input.get(p2) - input.get(p) > 100) {
-                        count++;
-                    }
-
-                }
-            }
-        }
-
+        int count = getShortCuts(path, input, 2);
 
 
         return String.valueOf(count);
@@ -77,18 +64,68 @@ public class Main {
 
     }
 
-    private LinkedList<Point> calculateSaves(Grid<Integer> input) {
+    public String part2() {
+        Grid<Integer> input = getInput();
+
+        LinkedList<Point> path = calculatePath(input);
+
+        for (int i = 0; i < path.size(); i++) {
+            Point p = path.get(i);
+            input.set(p, i);
+        }
+
+        int count = getShortCuts(path, input, 20);
+
+
+        return String.valueOf(count);
+
+
+    }
+
+    private static int getShortCuts(LinkedList<Point> path, Grid<Integer> input, int allowed) {
+        int count = 0;
+        for (Point p : path) {
+            int s = input.get(p);
+            for (Point p2 : path) {
+                int s2 = input.get(p2);
+
+                if (s2 < s) {
+                    continue;
+                }
+
+                if (p.equals(p2)) {
+                    continue;
+                }
+                int distance = Math.abs(p.getX() - p2.getX()) + Math.abs(p.getY() - p2.getY());
+
+                if (distance == 1) {
+                    continue;
+                }
+
+                if (distance <= allowed) {
+                    int dx = s2 - s - distance;
+                    if (dx >= 100) {
+                        count += 1;
+                    }
+                }
+            }
+
+
+        }
+        return count;
+    }
+
+    private LinkedList<Point> calculatePath(Grid<Integer> input) {
         Point start = input.find(-2);
         Point end = input.find(-3);
-        Queue<Triple<Point, LinkedList<Point>, Integer>> queue = new PriorityQueue<>(Comparator.comparingInt(t -> t.getSecond().size()));
+        Queue<Pair<Point, LinkedList<Point>>> queue = new PriorityQueue<>(Comparator.comparingInt(t -> t.getSecond().size()));
 
-        queue.add(new Triple<>(start, new LinkedList<>(), 0));
+        queue.add(new Pair<>(start, new LinkedList<>()));
 
         while (!queue.isEmpty()) {
-            Triple<Point, LinkedList<Point>, Integer> current = queue.poll();
+            Pair<Point, LinkedList<Point>> current = queue.poll();
             Point currentPoint = current.getFirst();
             LinkedList<Point> currentPath = current.getSecond();
-            int currentCheat = current.getThird();
 
             if (currentPath.contains(currentPoint)) {
                 continue;
@@ -102,18 +139,14 @@ public class Main {
             for (int[] direction : directions) {
                 Point neighbour = currentPoint.add(direction[0], direction[1]);
 
-                if (input.get(neighbour) == null) {
+                if (input.get(neighbour) == null || (input.get(neighbour) == -4)) {
                     continue;
                 }
-                queue.add(new Triple<>(neighbour, new LinkedList<>(currentPath), currentCheat));
+                queue.add(new Pair<>(neighbour, new LinkedList<>(currentPath)));
 
             }
         }
         return null;
-    }
-
-    public String part2() {
-        return "";
     }
 
 
