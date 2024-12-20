@@ -57,53 +57,16 @@ public class Main {
         int count = 0;
 
         for (Point p : path) {
-            if (input.get(p) != null) {
-                int distance = input.get(p);
-                // check if we go through a wall we have to cheat
-                Queue<Pair<Point, Integer>> queue = new LinkedList<>();
-                queue.add(new Pair<>(p, 0));
-
-                HashSet<Point> visited = new HashSet<>();
-
-                while (!queue.isEmpty()) {
-                    Pair<Point, Integer> current = queue.poll();
-                    Point currentPoint = current.getFirst();
-                    int currentCheat = current.getSecond();
-
-                    if (visited.contains(currentPoint)) {
-                        continue;
-                    }
-
-                    visited.add(currentPoint);
-
-
-
-                    if (input.get(currentPoint) != null && currentCheat != 0) {
-                        if (currentPoint.equals(p)) {
-                            continue;
-                        }
-
-                        if (input.get(currentPoint) <= (distance - currentCheat - 100)) {
-                            count += 1;
-                        }
-
-                        continue;
-                    }
-
-                    if (currentCheat > 20) {
-                        continue;
-                    }
-
-
-
-                    for (int[] direction : directions) {
-                        Point neighbour = currentPoint.add(direction[0], direction[1]);
-
-                        queue.add(new Pair<>(neighbour, currentCheat + 1));
-                    }
+            for (Point p2 : path) {
+                if (p.equals(p2)) {
+                    continue;
                 }
+                if (p.manhattan(p2) <= 20) {
+                    if (input.get(p2) - input.get(p) > 100) {
+                        count++;
+                    }
 
-
+                }
             }
         }
 
