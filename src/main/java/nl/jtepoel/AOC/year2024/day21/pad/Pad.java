@@ -51,7 +51,7 @@ public class Pad {
         }
 
         //get all paths
-        Queue<Triple<Point, List<Pair<Point,Character>>, Set<Point>>> paths = new PriorityQueue<>(Comparator.comparingInt(t -> t.getSecond().size()));
+        Queue<Triple<Point, List<Pair<Point,Character>>, Set<Point>>> paths = new LinkedList<>();
         paths.add(new Triple<>(current, new ArrayList<>(), new HashSet<>()));
 
         while (!paths.isEmpty()) {
@@ -74,7 +74,6 @@ public class Pad {
                 }
                 temp.add('A');
                 out.add(temp);
-                continue;
             }
             for (char direction : List.of('^', 'v', '<', '>')) {
                 Pair<Point, Character> next = move(direction, p);
@@ -95,9 +94,8 @@ public class Pad {
     }
 
     public List<String> buildCode(Character c) {
-        List<List<Character>> res = new ArrayList<>();
         List<List<Character>> gotTo = gotTo(c);
-        res.addAll(gotTo);
+        List<List<Character>> res = new ArrayList<>(gotTo);
 
         List<String> codes = new ArrayList<>();
 
