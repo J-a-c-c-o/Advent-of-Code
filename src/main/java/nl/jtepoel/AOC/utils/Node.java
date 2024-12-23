@@ -90,6 +90,10 @@ public class Node {
         }
     }
 
+    public int getDegree() {
+        return edges.size();
+    }
+
     public String getName() {
         return name;
     }
@@ -120,4 +124,6 @@ public class Node {
         }
         return name.equals(node.name);
     }
+
+
 }

@@ -178,6 +178,164 @@ public class Graph {
         return false;
     }
 
+    public List<List<Node>> getConnectedComponents() {
+        List<List<Node>> components = new ArrayList<>();
+        Set<Node> visited = new HashSet<>();
+        for (Node node : nodes) {
+            if (!visited.contains(node)) {
+                List<Node> component = new ArrayList<>();
+                getConnectedComponent(node, visited, component);
+                components.add(component);
+            }
+        }
+        return components;
+    }
+
+    private void getConnectedComponent(Node node, Set<Node> visited, List<Node> component) {
+        if (visited.contains(node)) {
+            return;
+        }
+
+        visited.add(node);
+
+        component.add(node);
+    }
+
+    private List<Node> getDegeneracyOrdering() {
+
+        List<Node> degeneracyOrdering = new ArrayList<>(nodes);
+        degeneracyOrdering.sort(Comparator.comparingInt(Node::getDegree));
+
+        return degeneracyOrdering;
+    }
+
+
+    /**
+     * algorithm BronKerbosch3(G) is.
+     *     P = V(G)
+     *     R = X = empty
+     *     for each vertex v in a degeneracy ordering of G do
+     *         BronKerbosch2({v}, P ⋂ N(v), X ⋂ N(v))
+     *         P := P \ {v}
+     *         X := X ⋃ {v}
+     * @return the biggest clique
+     */
+    public List<Node> bronKerbosch() {
+        List<Node> biggest = new ArrayList<>();
+        HashSet<Node> P = new HashSet<>(nodes);
+        HashSet<Node> X = new HashSet<>();
+
+
+        List<Node> degeneracyOrdering = getDegeneracyOrdering();
+        for (Node node : degeneracyOrdering) {
+            HashSet<Node> newR = new HashSet<>();
+            newR.add(node);
+            HashSet<Node> newP = new HashSet<>(P);
+            newP.retainAll(node.getConnected());
+            HashSet<Node> newX = new HashSet<>(X);
+            newX.retainAll(node.getConnected());
+            HashSet<Node> temp = bronKerbosch2(newR, newP, newX);
+
+            if (temp.size() > biggest.size()) {
+                biggest = new ArrayList<>(temp);
+            }
+
+            P.remove(node);
+            X.add(node);
+        }
+
+        return biggest;
+    }
+
+
+
+    /**
+     * algorithm BronKerbosch1(R, P, X) is.
+     *     if P and X are both empty then
+     *         report R as a maximal clique
+     *     for each vertex v in P do
+     *         BronKerbosch1(R ⋃ {v}, P ⋂ N(v), X ⋂ N(v))
+     *         P := P \ {v}
+     *         X := X ⋃ {v}
+     * @param R is the set of vertices in the current clique
+     * @param P is the set of vertices that can be added to the current clique
+     * @param X is the set of vertices that cannot be added to the current clique
+     * @return the biggest clique
+     */
+    private HashSet<Node> bronKerbosch1(HashSet<Node> R, HashSet<Node> P, HashSet<Node> X) {
+        if (P.isEmpty() && X.isEmpty()) {
+            return R;
+        }
+
+        HashSet<Node> biggest = new HashSet<>();
+        HashSet<Node> pCopy = new HashSet<>(P);
+        for (Node node : pCopy) {
+            HashSet<Node> newR = new HashSet<>(R);
+            newR.add(node);
+            HashSet<Node> newP = new HashSet<>(P);
+            newP.retainAll(node.getConnected());
+            HashSet<Node> newX = new HashSet<>(X);
+            newX.retainAll(node.getConnected());
+            HashSet<Node> temp = bronKerbosch1(newR, newP, newX);
+
+            if (temp.size() > biggest.size()) {
+                biggest = temp;
+            }
+
+            P.remove(node);
+            X.add(node);
+        }
+
+        return biggest;
+    }
+
+    /**
+     * algorithm BronKerbosch2(R, P, X) is.
+     *     if P and X are both empty then
+     *         report R as a maximal clique
+     *     choose a pivot vertex u in P ⋃ X
+     *     for each vertex v in P \ N(u) do
+     *         BronKerbosch2(R ⋃ {v}, P ⋂ N(v), X ⋂ N(v))
+     *         P := P \ {v}
+     *         X := X ⋃ {v}
+     *
+     *
+     * @param R is the set of vertices in the current clique
+     * @param P is the set of vertices that can be added to the current clique
+     * @param X is the set of vertices that cannot be added to the current clique
+     * @return the biggest clique
+     */
+    private HashSet<Node> bronKerbosch2(HashSet<Node> R, HashSet<Node> P, HashSet<Node> X) {
+        if (P.isEmpty() && X.isEmpty()) {
+            return R;
+        }
+
+        Node pivot = P.isEmpty() ? X.iterator().next() : P.iterator().next();
+
+        HashSet<Node> biggest = new HashSet<>();
+        HashSet<Node> pCopy = new HashSet<>(P);
+        for (Node node : pCopy) {
+            if (!node.getConnected().contains(pivot)) {
+                HashSet<Node> newR = new HashSet<>(R);
+                newR.add(node);
+                HashSet<Node> newP = new HashSet<>(P);
+                newP.retainAll(node.getConnected());
+                HashSet<Node> newX = new HashSet<>(X);
+                newX.retainAll(node.getConnected());
+                HashSet<Node> temp = bronKerbosch2(newR, newP, newX);
+
+                if (temp.size() > biggest.size()) {
+                    biggest = temp;
+                }
+
+                P.remove(node);
+                X.add(node);
+            }
+        }
+
+        return biggest;
+    }
+
     public class PathInfo {
         List<Node> path;
         int distance;
