@@ -336,6 +336,28 @@ public class Graph {
         return biggest;
     }
 
+    public void dotGraph(String toFile) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("graph G {\n");
+        for (Node node : nodes) {
+            sb.append(node.getName()).append(";\n");
+        }
+
+        for (Node node : nodes) {
+            for (Node other : node.getConnected()) {
+                if (node.getName().compareTo(other.getName()) < 0) {
+                    sb.append(node.getName()).append(" -- ").append(other.getName()).append(";\n");
+                }
+            }
+        }
+
+        sb.append("}");
+
+        // write to file
+        Utils.writeToFile(toFile, sb.toString());
+
+    }
+
     public class PathInfo {
         List<Node> path;
         int distance;

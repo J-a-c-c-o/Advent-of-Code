@@ -249,4 +249,12 @@ public class Utils {
 
         return x1;
     }
+
+    public static void writeToFile(String toFile, String string) {
+        try {
+            Files.writeString(Path.of(toFile), string);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
