@@ -1,7 +1,7 @@
 # Advent of Code 🎄
 
 ![Language](https://img.shields.io/badge/Language-Java-orange?style=flat-square)
-![Days Completed](https://img.shields.io/badge/Days%20Completed-74-blue?style=flat-square)
+![Days Completed](https://img.shields.io/badge/Days%20Completed-76-blue?style=flat-square)
 
 Welcome to my solutions for the [Advent of Code](https://adventofcode.com/) challenges! This repository contains my Java solutions for the puzzles, along with utility classes to streamline the process of solving the challenges.
 
@@ -22,7 +22,7 @@ Advent of Code is an annual programming event in December, where participants so
 | Day 2 <br> ⭐⭐ | Day 3 <br> ⭐⭐  | Day 4 <br> ⭐⭐  | Day 5 <br> ⭐⭐  | Day 6 <br> ⭐⭐  | Day 7 <br> ⭐⭐  | Day 8 <br> ⭐⭐  |
 | Day 9 <br> ⭐⭐ | Day 10 <br> ⭐⭐  | Day 11 <br> ⭐⭐  | Day 12 <br> ⭐⭐  | Day 13 <br> ⭐⭐  | Day 14 <br> ⭐⭐  | Day 15 <br> ⭐⭐ |
 | Day 16 <br> ⭐⭐ | Day 17 <br> ⭐⭐  | Day 18 <br> ⭐⭐  | Day 19 <br> ⭐⭐  | Day 20 <br> ⭐⭐  | Day 21 <br> ⭐⭐  | Day 22 <br> ⭐⭐ |
-| Day 23 <br> ⭐⭐ |  Day 24 <br> ⏳⏳  |   Day 25 <br> ⏳⏳ |   |   |
+| Day 23 <br> ⭐⭐ |  Day 24 <br> ⭐⭐  |   Day 25 <br> ⭐⭐ |   |   |
 
 ---
 
@@ -109,6 +109,8 @@ Advent of Code is an annual programming event in December, where participants so
 | 2024 | 21  | Keypad Conundrum                   | ⭐⭐⭐⭐⭐      |
 | 2024 | 22  | Monkey Market                      | ⭐⭐⭐⭐       |
 | 2024 | 23  | LAN Party                          | ⭐⭐⭐        |
+| 2024 | 24  | Crossed Wires                      | ⭐⭐⭐⭐⭐⭐     |
+| 2024 | 25  | Code Chronicle                     | ⭐⭐⭐⭐       |
 
 ---
 
