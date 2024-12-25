@@ -219,5 +219,29 @@ public class Grid<A> {
         return null;
     }
 
+    public List<List<A>> columns() {
+        List<List<A>> columns = new ArrayList<>();
+        for (int i = getMinX(); i <= getMaxX(); i++) {
+            List<A> column = new ArrayList<>();
+            for (int j = getMinY(); j <= getMaxY(); j++) {
+                column.add(getOrDefault(i, j, null));
+            }
+            columns.add(column);
+        }
+        return columns;
+    }
+
+    public List<List<A>> rows() {
+        List<List<A>> rows = new ArrayList<>();
+        for (int i = getMinY(); i <= getMaxY(); i++) {
+            List<A> row = new ArrayList<>();
+            for (int j = getMinX(); j <= getMaxX(); j++) {
+                row.add(getOrDefault(j, i, null));
+            }
+            rows.add(row);
+        }
+        return rows;
+    }
+
 
 }

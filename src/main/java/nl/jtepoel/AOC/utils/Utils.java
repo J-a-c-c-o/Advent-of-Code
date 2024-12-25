@@ -257,4 +257,25 @@ public class Utils {
             System.out.println(e.getMessage());
         }
     }
+
+    public List<Grid<Character>> getGrids(List<String> lines) {
+        List<Grid<Character>> grids = new ArrayList<>();
+        Grid<Character> grid = new Grid<>();
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i);
+
+            if (line.isEmpty()) {
+                grids.add(grid);
+                grid = new Grid<>();
+            } else {
+                for (int j = 0; j < line.length(); j++) {
+                    grid.set(j, i, line.charAt(j));
+                }
+            }
+        }
+
+        grids.add(grid);
+
+        return grids;
+    }
 }

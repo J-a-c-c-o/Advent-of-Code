@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import nl.jtepoel.AOC.utils.Grid;
 import nl.jtepoel.AOC.utils.Pair;
 import nl.jtepoel.AOC.utils.Utils;
 
@@ -29,54 +30,31 @@ public class Main {
         List<List<Integer>> keys = new ArrayList<>();
         List<String> lines = utils.getLines(Utils.LOCSRC + "/year2024/day25/input.txt");
 
-        boolean isPins = true;
 
-        List<Integer> temp = new ArrayList<>();
-        for (int i = 0; i < lines.getFirst().length(); i++) {
-            temp.add(-1);
-        }
-
-
-        for (String line : lines) {
-            if (line.isEmpty()) {
-                if (isPins) {
-                    pins.add(temp);
-                } else {
-                    keys.add(temp);
-                }
-
-                temp = new ArrayList<>();
-                continue;
+        List<Grid<Character>> grids = utils.getGrids(lines);
+        for (Grid<Character> grid : grids) {
+            List<Integer> temp = new ArrayList<>();
+            List<List<Character>> columns = grid.columns();
+            for (int i = 0; i < columns.size(); i++) {
+                temp.add(0);
             }
 
-            if (temp.isEmpty()) {
-                for (int i = 0; i < line.length(); i++) {
-                    temp.add(-1);
-                }
-                // check if the first line has . or # in it
-                // if it has . it is a key and not a pin
-                isPins = !line.contains(".");
+            for (int i = 0; i < columns.size(); i++) {
+                List<Character> column = columns.get(i);
+                int num = column.stream().filter(c -> c == '#').mapToInt(_ -> 1).sum() - 1;
+                temp.set(i, num);
             }
 
-            for (int i = 0; i < line.length(); i++) {
-                char c = line.charAt(i);
-                // count the number of # per column
-                if (c == '#') {
-                    temp.set(i, temp.get(i) + 1);
-                }
+
+            if (grid.rows().getFirst().getFirst() == '#') {
+                pins.add(temp);
+            } else {
+                keys.add(temp);
             }
         }
-
-        if (isPins) {
-            pins.add(temp);
-        } else {
-            keys.add(temp);
-        }
-
 
 
         return Pair.of(pins, keys);
-
     }
 
     public String part1() {
