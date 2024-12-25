@@ -40,17 +40,61 @@ public class Main {
         String year = scanner.nextLine();
         System.out.println("Enter the day:");
         String day = scanner.nextLine();
+
+        if (year.equals("all") && day.equals("all")) {
+            runAllYears();
+            return;
+        }
+
+        if (day.equals("all")) {
+            runAllDays(year);
+            return;
+        }
+
         if (fileExist(year, day) && inputIsValid(year, day)) {
             System.out.println("Day " + day + " of year " + year + " exists. Do you want to run it? (y/N)");
             String input = scanner.nextLine();
             if (input.equals("y")) {
                 runDay(year, day);
             }
-        } else {
-            System.out.println("Something went wrong. Do you want to try again? (y/N)");
-            String input = scanner.nextLine();
-            if (input.equals("y")) {
-                runDay();
+
+            return;
+        }
+
+
+        System.out.println("Something went wrong. Do you want to try again? (y/N)");
+        String input = scanner.nextLine();
+        if (input.equals("y")) {
+            runDay();
+        }
+
+    }
+
+    private void runAllYears() {
+        Set<String> years = Utils.getDirectories("src/main/java/nl/jtepoel/AOC");
+        System.out.println(years);
+        for (String year : years) {
+
+            if (!year.startsWith("year")) {
+                continue;
+            }
+
+            String yearNumber = year.substring(4);
+
+            runAllDays(yearNumber);
+        }
+    }
+
+    private void runAllDays(String yearNumber) {
+        Set<String> days = Utils.getDirectories("src/main/java/nl/jtepoel/AOC/year" + yearNumber);
+        for (String day : days) {
+            if (!day.startsWith("day")) {
+                continue;
+            }
+
+            String dayNumber = day.substring(3);
+            if (fileExist(yearNumber, dayNumber) && inputIsValid(yearNumber, dayNumber)) {
+                runDay(yearNumber, dayNumber);
             }
         }
     }

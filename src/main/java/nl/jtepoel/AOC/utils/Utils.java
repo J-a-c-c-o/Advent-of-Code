@@ -258,6 +258,20 @@ public class Utils {
         }
     }
 
+    public static Set<String> getDirectories(String s) {
+        Set<String> directories = new HashSet<>();
+        File[] files = new File(s).listFiles();
+        if (files == null) {
+            return directories;
+        }
+        for (File file : files) {
+            if (file.isDirectory()) {
+                directories.add(file.getName());
+            }
+        }
+        return directories;
+    }
+
     public List<Grid<Character>> getGrids(List<String> lines) {
         List<Grid<Character>> grids = new ArrayList<>();
         Grid<Character> grid = new Grid<>();
