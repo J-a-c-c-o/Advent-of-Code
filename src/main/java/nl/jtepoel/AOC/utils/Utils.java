@@ -323,7 +323,7 @@ public class Utils {
     }
 
 
-    public Long getRepeatingPattern(long sequence) {
+    public long getRepeatingPattern(long sequence) {
         sequence = Math.abs(sequence);
         long length = (long)(Math.log10(sequence) + 1);
         for (int sublength = 1; sublength < length; sublength++) {

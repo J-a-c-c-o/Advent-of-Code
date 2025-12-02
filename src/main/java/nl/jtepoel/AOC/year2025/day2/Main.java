@@ -64,7 +64,7 @@ public class Main {
         long count_invalid = 0;
         for (Pair<Long, Long> pair : pairs) {
             for (long i = pair.x; i <= pair.y; i++) {
-                Long sequence = utils.getRepeatingPattern(i);
+                long sequence = utils.getRepeatingPattern(i);
                 if (sequence != -1L) {
                     count_invalid+=i;
                 }
