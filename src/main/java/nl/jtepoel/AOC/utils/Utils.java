@@ -292,4 +292,68 @@ public class Utils {
 
         return grids;
     }
+
+    public String getRepeatingPattern(String sequence) {
+        for (int sublength = 1; sublength < sequence.length(); sublength++) {
+            String prev = null;
+            boolean found = false;
+            if (sequence.length() % sublength != 0) {
+                continue;
+            }
+            for (int j = 0; j <= sequence.length() - sublength; j+=sublength) {
+                String sub = sequence.substring(j, j + sublength);
+
+                if (prev == null) {
+                    prev = sub;
+                }
+
+                if (!prev.equals(sub)) {
+                    found = true;
+                    break;
+                }
+
+            }
+            if (!found) {
+                return prev;
+            }
+
+
+        }
+        return null;
+    }
+
+
+    public Long getRepeatingPattern(long sequence) {
+        sequence = Math.abs(sequence);
+        long length = (long)(Math.log10(sequence) + 1);
+        for (int sublength = 1; sublength < length; sublength++) {
+            long prev = -1L;
+            boolean found = false;
+
+            if (length % sublength != 0) {
+                continue;
+            }
+
+            for (int j = 0; j <= length - sublength; j+=sublength) {
+                long sub = (long) (sequence / Math.pow(10, j));
+                sub = (long) (sub % Math.pow(10, (sublength)));
+
+                if (prev == -1L) {
+                    prev = sub;
+                }
+
+                if (prev != sub) {
+                    found = true;
+                    break;
+                }
+
+            }
+            if (!found) {
+                return prev;
+            }
+
+
+        }
+        return -1L;
+    }
 }

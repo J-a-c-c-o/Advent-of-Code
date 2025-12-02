@@ -30,7 +30,6 @@ public class Main {
         long count = 0;
         for(String line : input) {
             String[] parts = line.split(": ");
-            // part1: 1-3 a  par2: pppppp
             int lower = Integer.parseInt(parts[0].substring(0, line.indexOf("-")));
             int upper = Integer.parseInt(parts[0].substring(line.indexOf("-") + 1, line.indexOf(" ")));
             char letter = parts[0].substring(line.indexOf(" ") + 1).toCharArray()[0];
