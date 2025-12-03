@@ -113,6 +113,7 @@ Advent of Code is an annual programming event in December, where participants so
 | 2024 | 25  | Code Chronicle                     | ⭐⭐⭐⭐       |
 | 2025 | 1   | Secret Entrance                    | ⭐⭐         |
 | 2025 | 2   | Gift Shop                          | ⭐⭐⭐        |
+| 2025 | 2   | Lobby                              | ⭐⭐         |
 
 ---
 
