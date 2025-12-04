@@ -38,7 +38,6 @@ public class Main {
 
         }
 
-        int[][] adjacent = new int[][]{{0,1}, {0,-1}, {1,0}, {-1,0}, {-1,-1}, {1,-1}, {1,1}, {-1,1}};
         Pair<Integer,Integer> dim = grid.getDimensions();
         int sum = 0;
         for (int i = 0; i <= dim.x; i++) {
@@ -47,7 +46,7 @@ public class Main {
                 if (grid.get(j, i) != '@') continue;
 
                 int count = 0;
-                for (int[] dir : adjacent) {
+                for (int[] dir : Grid.DIRECTIONS8) {
                     if (grid.getOrDefault(j + dir[0], i + dir[1], '.') == '@') {
                         count++;
                     }
@@ -76,18 +75,15 @@ public class Main {
 
         }
 
-        int[][] adjacent = new int[][]{{0,1}, {0,-1}, {1,0}, {-1,0}, {-1,-1}, {1,-1}, {1,1}, {-1,1}};
         Pair<Integer,Integer> dim = grid.getDimensions();
         int total = 0;
         while(true) {
             int sum = 0;
             for (int i = 0; i <= dim.x; i++) {
                 for (int j = 0; j <= dim.y; j++) {
-
                     if (grid.get(j, i) != '@') continue;
-
                     int count = 0;
-                    for (int[] dir : adjacent) {
+                    for (int[] dir : Grid.DIRECTIONS8) {
                         if (grid.getOrDefault(j + dir[0], i + dir[1], '.') == '@') {
                             count++;
                         }

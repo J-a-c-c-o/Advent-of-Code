@@ -5,7 +5,8 @@ import java.util.*;
 public class Grid<A> {
     private final Map<Point, A> grid;
     private final Map<A, List<Point>> frequency;
-    int[][] directions = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    public final static int[][] DIRECTIONS = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    public final static int[][] DIRECTIONS8 = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, 1}, {1, 1}, {-1, -1}, {1, -1}};
 
     public Grid() {
         grid = new HashMap<>();
@@ -62,7 +63,7 @@ public class Grid<A> {
         grid.clear();
     }
 
-    public List<Point> getNeighbours(Point point) {
+    public List<Point> getNeighbours(Point point, int[][] directions) {
         List<Point> neighbours = new ArrayList<>();
         for (int[] direction : directions) {
             Point neighbour = new Point(point.x + direction[0], point.y + direction[1]);
@@ -74,7 +75,7 @@ public class Grid<A> {
         return neighbours;
     }
 
-    public List<A> getNeighbourValues(Point point) {
+    public List<A> getNeighbourValues(Point point, int[][] directions) {
         List<A> neighbours = new ArrayList<>();
         for (int[] direction : directions) {
             Point neighbour = new Point(point.x + direction[0], point.y + direction[1]);
@@ -198,7 +199,7 @@ public class Grid<A> {
                 visited.add(current);
 
                 component.add(current);
-                for (Point neighbour : getNeighbours(current)) {
+                for (Point neighbour : getNeighbours(current, Grid.DIRECTIONS)) {
                     if (get(neighbour).equals(value)) {
                         queue.add(neighbour);
                     }
@@ -242,6 +243,5 @@ public class Grid<A> {
         }
         return rows;
     }
-
 
 }
