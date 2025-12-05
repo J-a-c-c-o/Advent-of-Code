@@ -1,9 +1,11 @@
 package nl.jtepoel.AOC.year2025.day4;
 
 
+import java.awt.*;
 import java.util.List;
 
 import nl.jtepoel.AOC.utils.Grid;
+import nl.jtepoel.AOC.utils.GridVisualizer;
 import nl.jtepoel.AOC.utils.Pair;
 import nl.jtepoel.AOC.utils.Utils;
 
@@ -75,6 +77,15 @@ public class Main {
 
         }
 
+        GridVisualizer<Character> vis = new GridVisualizer<Character>()
+                .setFitToScreen(true)
+                .setFadeEnabled(true)
+                .setHighlightColor(Color.red)
+                .setFadeDuration(1000);
+
+        vis.create(grid, '.');
+
+
         Pair<Integer,Integer> dim = grid.getDimensions();
         int total = 0;
         while(true) {
@@ -92,9 +103,20 @@ public class Main {
                     if (count < 4) {
                         sum++;
                         grid.set(j, i, '.');
+
+
                     }
                 }
+
             }
+
+            vis.update();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
 
             if (sum == 0) {
                 break;
@@ -104,6 +126,8 @@ public class Main {
 
 
         }
+
+
         return String.valueOf(total);
     }
 
