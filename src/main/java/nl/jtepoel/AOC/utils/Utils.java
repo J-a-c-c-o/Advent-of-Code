@@ -356,4 +356,25 @@ public class Utils {
         }
         return -1L;
     }
+
+
+    public List<Pair<Long, Long>> simplifyRanges(List<Pair<Long, Long>> ranges) {
+        ranges.sort(Comparator.comparingLong(Pair::getX));
+        List<Pair<Long,Long>> combined = new ArrayList<>();
+        long currX = ranges.getFirst().x;
+        long currY = ranges.getFirst().y;
+        for (Pair<Long,Long> range : ranges) {
+            if (currY < range.x) {
+                combined.add(new Pair<>(currX, currY));
+                currX = range.x;
+                currY = range.y;
+
+            } else if (range.y > currY) {
+                currY = range.y;
+            }
+        }
+
+        combined.add(new Pair<>(currX, currY));
+        return combined;
+    }
 }
