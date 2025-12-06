@@ -20,7 +20,7 @@ public class Utils {
 
     public List<String> getLines(String filename) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            return reader.lines().toList();
+            return new ArrayList<>(reader.lines().toList());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
