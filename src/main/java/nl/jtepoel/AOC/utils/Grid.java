@@ -7,6 +7,11 @@ public class Grid<A> {
     private final Map<A, List<Point>> frequency;
     public final static int[][] DIRECTIONS = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
     public final static int[][] DIRECTIONS8 = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}, {-1, 1}, {1, 1}, {-1, -1}, {1, -1}};
+    private Integer minY = null;
+    private Integer maxY = null;
+    private Integer minX = null;
+    private Integer maxX = null;
+
 
     public Grid() {
         grid = new HashMap<>();
@@ -17,12 +22,37 @@ public class Grid<A> {
         grid.put(point, value);
         frequency.putIfAbsent(value, new ArrayList<>());
         frequency.get(value).add(point);
+
+        if (minX == null || point.x < minX) {
+            minX = point.x;
+        }
+        if (maxX == null || point.x > maxX) {
+            maxX = point.x;
+        }
+        if (minY == null || point.y < minY) {
+            minY = point.y;
+        }
+        if (maxY == null || point.y > maxY) {
+            maxY = point.y;
+        }
     }
 
     public void set(int x, int y, A value) {
         grid.put(new Point(x, y), value);
         frequency.putIfAbsent(value, new ArrayList<>());
         frequency.get(value).add(new Point(x, y));
+        if (minX == null || x < minX) {
+            minX = x;
+        }
+        if (maxX == null || x > maxX) {
+            maxX = x;
+        }
+        if (minY == null || y < minY) {
+            minY = y;
+        }
+        if (maxY == null || y > maxY) {
+            maxY = y;
+        }
     }
 
     public A get(Point point) {
@@ -93,35 +123,19 @@ public class Grid<A> {
     }
 
     public int getMinY() {
-        int min = Integer.MAX_VALUE;
-        for (Point y : getGrid().keySet()) {
-            min = Math.min(min, y.y);
-        }
-        return min;
+        return minY == null ? 0 : minY;
     }
 
     public int getMaxY() {
-        int max = Integer.MIN_VALUE;
-        for (Point y : getGrid().keySet()) {
-            max = Math.max(max, y.y);
-        }
-        return max;
+        return maxY == null ? 0 : maxY;
     }
 
     public int getMinX() {
-        int min = Integer.MAX_VALUE;
-        for (Point x : getGrid().keySet()) {
-            min = Math.min(min, x.x);
-        }
-        return min;
+        return minX == null ? 0 : minX;
     }
 
     public int getMaxX() {
-        int max = Integer.MIN_VALUE;
-        for (Point x : getGrid().keySet()) {
-            max = Math.max(max, x.x);
-        }
-        return max;
+        return maxX == null ? 0 : maxX;
     }
 
     public void print(A defaultValue) {
