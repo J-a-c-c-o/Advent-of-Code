@@ -17,9 +17,13 @@ import java.util.function.Function;
 public class GridVisualizer<A> {
     private JFrame frame;
     private JPanel panel;
+    private JLabel headingLabel;
     private Grid<A> grid;
     private int cellSize;
     private A defaultValue;
+    private String headingText;
+    private Font headingFont;
+    private Color headingColor;
     private Function<A, Color> colorMapper;
     private Function<A, String> textMapper;
     private final Map<A, Color> colorCache;
@@ -102,6 +106,9 @@ public class GridVisualizer<A> {
         this.previousColors = new HashMap<>();
         this.highlightColor = Color.YELLOW;
         this.highlightPhaseRatio = 0.3;
+        this.headingText = null;
+        this.headingFont = new Font("SansSerif", Font.BOLD, 16);
+        this.headingColor = Color.WHITE;
     }
 
     /**
@@ -137,6 +144,18 @@ public class GridVisualizer<A> {
 
         frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+        // Create heading label
+        headingLabel = new JLabel(headingText != null ? headingText : "", SwingConstants.CENTER);
+        headingLabel.setFont(headingFont);
+        headingLabel.setForeground(headingColor);
+        headingLabel.setBackground(new Color(0, 0, 40));
+        headingLabel.setOpaque(true);
+        headingLabel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        if (headingText != null && !headingText.isEmpty()) {
+            frame.add(headingLabel, BorderLayout.NORTH);
+        }
 
         panel = new JPanel() {
             @Override
@@ -153,7 +172,7 @@ public class GridVisualizer<A> {
         panel.setPreferredSize(new Dimension(width, height));
         panel.setBackground(Color.BLACK);
 
-        frame.add(panel);
+        frame.add(panel, BorderLayout.CENTER);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -376,6 +395,71 @@ public class GridVisualizer<A> {
      */
     public GridVisualizer<A> setHighlightPhaseRatio(double ratio) {
         this.highlightPhaseRatio = Math.max(0.1, Math.min(0.9, ratio));
+        return this;
+    }
+
+    /**
+     * Sets the heading text to display above the grid.
+     * Call this before create() to show the heading when the window opens,
+     * or call updateHeading() after create() to update dynamically.
+     *
+     * @param text The heading text to display
+     * @return This visualizer for method chaining
+     */
+    public GridVisualizer<A> setHeading(String text) {
+        this.headingText = text;
+        if (headingLabel != null) {
+            updateHeading(text);
+        }
+        return this;
+    }
+
+    /**
+     * Updates the heading text dynamically after the window has been created.
+     *
+     * @param text The new heading text to display
+     */
+    public void updateHeading(String text) {
+        this.headingText = text;
+        if (headingLabel != null && frame != null) {
+            SwingUtilities.invokeLater(() -> {
+                headingLabel.setText(text != null ? text : "");
+                if (text != null && !text.isEmpty() && headingLabel.getParent() == null) {
+                    frame.add(headingLabel, BorderLayout.NORTH);
+                    frame.revalidate();
+                } else if ((text == null || text.isEmpty()) && headingLabel.getParent() != null) {
+                    frame.remove(headingLabel);
+                    frame.revalidate();
+                }
+            });
+        }
+    }
+
+    /**
+     * Sets the font for the heading text.
+     *
+     * @param font The font to use for the heading
+     * @return This visualizer for method chaining
+     */
+    public GridVisualizer<A> setHeadingFont(Font font) {
+        this.headingFont = font;
+        if (headingLabel != null) {
+            SwingUtilities.invokeLater(() -> headingLabel.setFont(font));
+        }
+        return this;
+    }
+
+    /**
+     * Sets the color for the heading text.
+     *
+     * @param color The color to use for the heading text
+     * @return This visualizer for method chaining
+     */
+    public GridVisualizer<A> setHeadingColor(Color color) {
+        this.headingColor = color;
+        if (headingLabel != null) {
+            SwingUtilities.invokeLater(() -> headingLabel.setForeground(color));
+        }
         return this;
     }
 

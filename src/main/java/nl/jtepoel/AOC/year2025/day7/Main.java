@@ -1,9 +1,12 @@
 package nl.jtepoel.AOC.year2025.day7;
 
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 import nl.jtepoel.AOC.utils.*;
+import nl.jtepoel.AOC.utils.Point;
 
 public class Main {
 
@@ -28,6 +31,26 @@ public class Main {
 
     public String part1() {
         Grid<Character> grid = getInput();
+
+        GridVisualizer<Character> vis = new GridVisualizer<Character>()
+                .setFitToScreen(true)
+                .setFadeEnabled(true)
+                .setHighlightColor(Color.red)
+                .setColorMapper(character -> switch (character) {
+                    case 'S' -> Color.GREEN;
+                    case '^' -> Color.WHITE;
+                    case '|' -> new Color(0, 111, 0);
+                    default -> new Color(0, 0, 40);
+                })
+                .setFadeDuration(1000);
+
+        vis.setHeadingFont(new Font("Monospaced", Font.BOLD, 20))
+                .setHeadingColor(Color.CYAN)
+                .setHeading("Part 1: 0");
+
+        vis.create(grid, '.');
+
+
         Point s = grid.find('S');
         List<Point> queue = new ArrayList<>();
         queue.add(s);
@@ -51,9 +74,13 @@ public class Main {
                 queue.add(below);
             } else if (belowChar == '^') {
                 steps++;
+                vis.setHeading("Part 1: " + steps);
                 queue.add(new Point(p.x + 1, p.y));
                 queue.add(new Point(p.x - 1, p.y));
             }
+
+            vis.update(grid);
+
         }
 
 
@@ -62,20 +89,22 @@ public class Main {
 
     public String part2() {
         Grid<Character> grid = getInput();
+
+
         Point s = grid.find('S');
-        long total = recursiveCalculate(grid, s, new HashMap<>());
+        long total = recursiveCalculate(grid, s, new long[grid.getMaxX() + 1][grid.getMaxY() + 1]);
         return String.valueOf(total);
     }
 
 
-    private static long recursiveCalculate(Grid<Character> grid, Point p, Map<Point, Long> visited) {
-
-        if (visited.containsKey(p)) {
-            return visited.get(p);
-        }
+    private static long recursiveCalculate(Grid<Character> grid, Point p, long[][] visited) {
 
         if (p.y > grid.getMaxY()) {
             return 1L;
+        }
+
+        if (visited[p.x][p.y] != 0) {
+            return visited[p.x][p.y];
         }
 
         Point below = new Point(p.x, p.y + 1);
@@ -93,9 +122,7 @@ public class Main {
             total += recursiveCalculate(grid, left, visited);
         }
 
-        visited.put(p, total);
-
-
+        visited[p.x][p.y] = total;
 
         return total;
     }
