@@ -244,4 +244,7 @@ public class Grid<A> {
         return rows;
     }
 
+    public List<Point> getPoints() {
+        return new ArrayList<>(grid.keySet());
+    }
 }
