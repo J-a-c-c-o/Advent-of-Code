@@ -98,7 +98,7 @@ public class Permutation {
      * @return Iterable of permutations
      * @param <E> type of the list
      */
-    private static <E> Iterable<List<E>> asIterable(List<E> list) {
+    public static <E> Iterable<List<E>> asIterable(List<E> list) {
         return () -> new PermutationIterator<>(list);
     }
 
@@ -107,7 +107,7 @@ public class Permutation {
      * using a non non-recursive version of Heap's algorithm.
      * @param <E>
      */
-    private static class PermutationIterator<E> implements Iterator<List<E>> {
+    public static class PermutationIterator<E> implements Iterator<List<E>> {
         private final List<E> current;
         private final int n;
         private final int[] indexes;
@@ -118,7 +118,7 @@ public class Permutation {
          * @param list list to generate permutations for
          * @param n number of elements to generate permutations for
          */
-        public PermutationIterator(List<E> list, int n) {
+        private PermutationIterator(List<E> list, int n) {
             this.current = new ArrayList<>(list);
             this.n = n;
             this.i = 1;
