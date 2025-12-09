@@ -156,8 +156,9 @@ public class Grid<A> {
     }
 
     public A getOrDefault(int x, int y, A i1) {
-        if (contains(x, y)) {
-            return get(x, y);
+        Point p = new Point(x, y);
+        if (contains(p)) {
+            return get(p);
         }
         return i1;
     }
@@ -260,5 +261,38 @@ public class Grid<A> {
 
     public List<Point> getPoints() {
         return new ArrayList<>(grid.keySet());
+    }
+
+    public void floadFill(Point point, A value) {
+        int minX = getMinX();
+        int maxX = getMaxX();
+        int minY = getMinY();
+        int maxY = getMaxY();
+        SortedSet<Point> queue = new TreeSet<>();
+        queue.add(point);
+        while (!queue.isEmpty()) {
+
+            Point current = queue.removeFirst();
+
+            set(current, value);
+
+            for (int[] neighbors : Grid.DIRECTIONS) {
+
+
+                Point n = new Point(current.getX() + neighbors[0], current.getY() + neighbors[1]);
+
+                if (minX - 1 > n.getX() || maxX + 1 < n.getX()) {
+                    continue;
+                }
+                if (minY - 1 > n.getY() || maxY + 1 < n.getY()) {
+                    continue;
+                }
+
+                if (get(n) == null) {
+                    queue.add(n);
+                }
+            }
+
+        }
     }
 }

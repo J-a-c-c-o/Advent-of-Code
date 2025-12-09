@@ -2,7 +2,7 @@ package nl.jtepoel.AOC.utils;
 
 import java.util.Objects;
 
-public class Point {
+public class Point implements Comparable<Point> {
 
     public int x;
     public int y;
@@ -21,7 +21,7 @@ public class Point {
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return x * 31 + y;
     }
 
     @Override
@@ -125,5 +125,16 @@ public class Point {
 
     public int manhattan(Point end) {
         return Math.abs(x - end.x) + Math.abs(y - end.y);
+    }
+
+    @Override
+    public int compareTo(Point o) {
+        if (x == o.x) {
+            if (y == o.y) {
+                return 0;
+            }
+            return Integer.compare(y, o.y);
+        }
+        return Integer.compare(x, o.x);
     }
 }
