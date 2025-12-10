@@ -109,11 +109,12 @@ public class Main {
 
         long max = Long.MIN_VALUE;
         for (int i = 0; i < points.size() - 1; i++) {
+            Point p1 = points.get(i);
+            int x1 = xList.indexOf(p1.x);
+            int y1 = yList.indexOf(p1.y);
             for (int j = i+1; j < points.size(); j++) {
-                Point p1 = points.get(i);
+
                 Point p2 = points.get(j);
-                int x1 = xList.indexOf(p1.x);
-                int y1 = yList.indexOf(p1.y);
                 int x2 = xList.indexOf(p2.x);
                 int y2 = yList.indexOf(p2.y);
                 if (valid(newGrid, Math.min(x1,x2), Math.min(y1,y2), Math.max(x1,x2), Math.max(y1,y2))) {

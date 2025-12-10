@@ -268,7 +268,7 @@ public class Grid<A> {
         int maxX = getMaxX();
         int minY = getMinY();
         int maxY = getMaxY();
-        SortedSet<Point> queue = new TreeSet<>();
+        LinkedHashSet<Point> queue = new LinkedHashSet<>();
         queue.add(point);
         while (!queue.isEmpty()) {
 
