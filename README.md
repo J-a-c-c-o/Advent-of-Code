@@ -1,7 +1,7 @@
 # Advent of Code 🎄
 
 ![Language](https://img.shields.io/badge/Language-Java-orange?style=flat-square)
-![Days Completed](https://img.shields.io/badge/Days%20Completed-86-blue?style=flat-square)
+![Days Completed](https://img.shields.io/badge/Days%20Completed-87-blue?style=flat-square)
 
 Welcome to my solutions for the [Advent of Code](https://adventofcode.com/) challenges! This repository contains my Java solutions for the puzzles, along with utility classes to streamline the process of solving the challenges.
 
@@ -20,7 +20,7 @@ Advent of Code is an annual programming event in December, where participants so
 |:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|
 |               |               |               |               |               |               | Day 1 <br> ⭐⭐ |
 | Day 2 <br> ⭐⭐ | Day 3 <br> ⭐⭐ | Day 4 <br> ⭐⭐ | Day 5 <br> ⭐⭐ | Day 6 <br> ⭐⭐ | Day 7 <br> ⭐⭐ | Day 8 <br> ⭐⭐ |
-| Day 9 <br> ⭐⭐ |  Day 10 <br> ⭐⭐ |  Day 11 <br> ⭐⭐ |  Day 12 <br>  |
+| Day 9 <br> ⭐⭐ |  Day 10 <br> ⭐⭐ |  Day 11 <br> ⭐⭐ |  Day 12 <br> ⭐⭐ |
 
 ---
 
@@ -120,6 +120,7 @@ Advent of Code is an annual programming event in December, where participants so
 | 2025 | 9   | Movie Theater                      | ⭐⭐⭐⭐⭐      |
 | 2025 | 10  | Factory                            | ⭐⭐⭐⭐       |
 | 2025 | 11  | Reactor                            | ⭐⭐⭐        |
+| 2025 | 12  | Christmas Tree Farm                | ⭐⭐⭐        |
 
 ---
 
